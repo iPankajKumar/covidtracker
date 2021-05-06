@@ -152,18 +152,18 @@
                     <div class="col-xl-4">
                         <div class="form-group">
                             <label>State</label>
-                            <select class="form-control" (click)="fetchCities($event.target.value)">
+                            <select class="form-control" (change)="fetchCities($event.target.value)">
                               <option disabled selected>Select State</option>
-                              <option *ngFor="let state of indianStates | keyvalue" [value]="state.key">{{state.value}}</option>
+                              <option *ngFor="let state of indianStates | sort" [value]="state">{{state | uppercase }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-xl-4">
                         <div class="form-group">
                             <label>City</label>
-                            <select class="form-control">
+                            <select class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
                               <option disabled>Select City</option>
-                              <option *ngFor="let city of indianCities" [value]="city">{{city}}</option>
+                              <option *ngFor="let city of indianCities | sort" [value]="city">{{city | uppercase }}</option>
                             </select>
                         </div>
                     </div>

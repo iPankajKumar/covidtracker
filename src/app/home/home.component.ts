@@ -1,9 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
-import * as states from '../../assets/json/IndianStates.json';
-import * as cities from '../../assets/json/IndianCities.json';
-import { Observable } from 'rxjs';
-import { request } from 'http';
+import * as allData from '../../assets/json/AllIndiaPincodes.json';
+
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
@@ -18,14 +17,7 @@ export class HomeComponent implements OnInit {
   areaCode: any[];
   selectedCodes: string[] = [];
   http: any;
-  constructor(el: ElementRef) { 
-    this.areaCode = [
-      { pinCode: "411043", code: "43" },
-      { pinCode: "411044", code: "44" },
-      { pinCode: "411045", code: "45" },
-      { pinCode: "411046", code: "46" },
-      { pinCode: "411047", code: "47" }
-    ];
+  constructor() { 
   }
   dateValueSingle: Date;
   dateValueFrom: Date;
@@ -33,17 +25,36 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
-     this.indianStates =  states['default'];
+     //Get unique states
+     var indianState = [...new Set(allData['default'].map(item => item.StateName))];
+    //Sort states alphabetically.
+    this.indianStates = indianState.sort((a:any, b:any) => a.toUpperCase().localeCompare(b.toUpperCase()));
   }
 
-  fetchCities(stateCode: string){
-   this.indianCities = cities['default'][stateCode];
+  fetchCities(stateName: string){
+   //this.indianCities = cities['default'][stateCode];
+   var allDatas  = allData['default'];
+   console.log("stateCode",stateName);
+   //get all cities 
+   var queryData = allDatas.filter( item => item.StateName.toUpperCase() === stateName.toUpperCase());
+   // uniq all cities
+   this.indianCities = [...new Set(queryData.map(item => item.District))];
+   console.log("this.indianCities",this.indianCities);
+
   }
 
-  fetchPinCodeByCities(){
-   
-    
-  
+  fetchPinCodeByCities(city:any){
+    var allDatas  = allData['default'];
+    //Filter Data by city names
+    var queryData = allDatas.filter( item => item.District === city);
+    //Filter uniq values by pincodes
+    var allPincodeData = [...new Set(queryData.map(item => item.Pincode))];
+
+    for (let index = 0; index < allPincodeData.length; index++) {
+      let pinObj = { pinCode: allPincodeData[index]};
+      this.areaCode.push(pinObj);
+    }
+    console.log("fetchPinCodeByCities",city, "queryData",queryData, "this.areaCode",this.areaCode);
   }
 
 }
