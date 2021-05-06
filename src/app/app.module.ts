@@ -10,6 +10,7 @@ import {CalendarModule} from 'primeng/calendar';
 
 
 import { Pipe, PipeTransform } from "@angular/core";
+import { HttpClientModule } from '@angular/common/http';
 
 @Pipe({
   name: "sort"
@@ -43,7 +44,7 @@ export class ArraySortPipe {
     MultiSelectModule,
     CalendarModule,
     BrowserAnimationsModule,
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

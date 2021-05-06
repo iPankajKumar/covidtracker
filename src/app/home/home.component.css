@@ -228,7 +228,7 @@ body .ui-multiselect .ui-multiselect-label {
     background: #04ACFF;
     width: 100%;
     bottom: 0;
-    animation: wipe 8s cubic-bezier(.2,.6,.8,.4) infinite forwards;
+    animation: wipe 63s cubic-bezier(.2,.6,.8,.4) infinite forwards;
   }
   @keyframes wipe {
     0% {
