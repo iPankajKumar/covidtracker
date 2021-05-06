@@ -154,7 +154,7 @@
                             <label>State</label>
                             <select class="form-control" (change)="fetchCities($event.target.value)">
                               <option disabled selected>Select State</option>
-                              <option *ngFor="let state of indianStates | sort" [value]="state">{{state | uppercase }}</option>
+                              <option *ngFor="let state of indianStates | sort" [value]="state">{{state}}</option>
                             </select>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                             <label>City</label>
                             <select class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
                               <option disabled>Select City</option>
-                              <option *ngFor="let city of indianCities | sort" [value]="city">{{city | uppercase }}</option>
+                              <option *ngFor="let city of indianCities | sort" [value]="city">{{city}}</option>
                             </select>
                         </div>
                     </div>

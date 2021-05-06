@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
-import * as allData from '../../assets/json/AllIndiaPincodes.json';
+import * as AllIndiaPincodes from '../../assets/json/AllIndiaPincodes.json';
 
 import { HttpClient } from "@angular/common/http";
 
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   indianStates :any=[];
   indianCities: any=[];
-  areaCode: any[];
+  areaCode: any[]=[];
   selectedCodes: string[] = [];
   http: any;
   constructor() { 
@@ -26,29 +26,30 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
      //Get unique states
-     var indianState = [...new Set(allData['default'].map(item => item.StateName))];
+     var indianState = [...new Set(AllIndiaPincodes['default'].map(item => item.STATENAME))];
     //Sort states alphabetically.
-    this.indianStates = indianState.sort((a:any, b:any) => a.toUpperCase().localeCompare(b.toUpperCase()));
+    this.indianStates = indianState.sort((a:any, b:any) => a.localeCompare(b));
   }
 
   fetchCities(stateName: string){
-   //this.indianCities = cities['default'][stateCode];
-   var allDatas  = allData['default'];
+    this.indianCities = [];
+   var allIndiaStates  = AllIndiaPincodes['default'];
    console.log("stateCode",stateName);
    //get all cities 
-   var queryData = allDatas.filter( item => item.StateName.toUpperCase() === stateName.toUpperCase());
+   var queryData = allIndiaStates.filter( item => item.STATENAME === stateName);
    // uniq all cities
-   this.indianCities = [...new Set(queryData.map(item => item.District))];
+   this.indianCities = [...new Set(queryData.map(item => item.DISTRICT))];
    console.log("this.indianCities",this.indianCities);
 
   }
 
   fetchPinCodeByCities(city:any){
-    var allDatas  = allData['default'];
+    this.areaCode = [];
+    var allIndiaCities  = AllIndiaPincodes['default'];
     //Filter Data by city names
-    var queryData = allDatas.filter( item => item.District === city);
+    var queryData = allIndiaCities.filter( item => item.DISTRICT === city);
     //Filter uniq values by pincodes
-    var allPincodeData = [...new Set(queryData.map(item => item.Pincode))];
+    var allPincodeData = [...new Set(queryData.map(item => item.PINCODE))];
 
     for (let index = 0; index < allPincodeData.length; index++) {
       let pinObj = { pinCode: allPincodeData[index]};
