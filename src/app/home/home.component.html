@@ -1,0 +1,226 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="panel-header-main">
+                <div class="container-fluid padding-lr-0">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="title">
+                                Title
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="button-area">
+                                <button type="button" class="btn-change common-btn" data-toggle="modal" data-target="#myModal">Change</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="panel-container-main">
+                <div class="container-fluid padding-lr-0">
+                    <div class="row">
+                        <div class="col-xl-2">
+                            <div id="timer">
+                                <span>05</span>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 padding-lr-0">
+                            <div class="cart-container">
+                            <div class="cart-list">
+                                <ul>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-single">
+                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
+                                            <div class="icon-syringe">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            Slot fount at
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-search fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Search</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body search-modal-body">
+            <div class="container-fluid">
+                <div class="margin-bottom-40">
+                <h4>Search By</h4>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label>State</label>
+                            <select class="form-control" (click)="fetchCities($event.target.value)">
+                              <option disabled selected>Select State</option>
+                              <option *ngFor="let state of indianStates | keyvalue" [value]="state.key">{{state.value}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label>City</label>
+                            <select class="form-control">
+                              <option disabled>Select City</option>
+                              <option *ngFor="let city of indianCities" [value]="city">{{city}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label>Pincode</label>
+                            <p-multiSelect 
+                            [options]="areaCode" 
+                            [(ngModel)]="selectedCodes" 
+                            defaultLabel="Select Pincode" 
+                            optionLabel="pinCode"
+                            >
+                            </p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                </div>
+                <div>
+                <h4>Select Date</h4>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <p-calendar [(ngModel)]="dateValueSingle" [touchUI]="true" [showIcon]="true" [readonlyInput]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    </div>
+                    <div class="or-div">Or</div>
+                    <div class="row">
+                    <div class="col-xl-4 dash">
+                        <div class="form-group">
+                            <label>From</label>
+                            <p-calendar [(ngModel)]="dateValueFrom" [touchUI]="true" [showIcon]="true" [readonlyInput]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group">
+                            <label>To</label>
+                            <p-calendar [(ngModel)]="dateValueTo" [touchUI]="true" [showIcon]="true" [readonlyInput]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn-search-all common-btn" data-dismiss="modal">Search</button>
+        </div>
+    
+      </div>
+    </div>
+  </div>

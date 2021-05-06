@@ -1,0 +1,48 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="row width-100p">
+          <div class="col-xl-12 padding-lr-0">
+            <button class="btn-sidebar" (click)="toggleSidebar()" type="button">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Vaccination Slot</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+    </div>
+  </nav>
+</header>
+<div class="container-fluid">
+  <div class="main-container">
+    <div class="sidebar-ui-list" [ngClass]="(opened==true)?'left-m300':''">
+      <div class="search-component-bar">
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form> 
+      </div>
+        <ul>
+            <li><a routerLink="">Home</a></li>
+        </ul>
+    </div>
+    <div class="component-container" [ngClass]="(opened==true)?'padding-left-s0':'padding-left-300'">
+      <router-outlet></router-outlet> 
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-12">
+          <div class="footer-content">
+           Copyright © 2021<script>document.write(new Date().getFullYear())</script> All Rights Reserved
+          </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+

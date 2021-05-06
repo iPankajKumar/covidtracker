@@ -1,0 +1,225 @@
+
+a:hover{
+    text-decoration: none;
+}
+
+button:focus{
+    outline: none;
+}
+
+body{
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.common-btn{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    -webkit-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+    box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+}
+
+header .navbar.bg-light {
+    background-color: #f8f9fa !important;
+    
+}
+
+.btn-sidebar{
+    border: 0;
+    background: transparent;
+    padding: 0;
+    position: relative;
+    top: -3px;
+    margin-right: 10px;
+    
+}
+.width-100p{
+    width: 100%;
+}
+
+.main-container{
+    position: relative;
+}
+.component-container{
+    padding-top: 65px;
+}
+.padding-left-300{
+    padding-left: 300px;
+    transition: 0.35s ease-in;
+}
+.sidebar-ui-list{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: #f8f9fa;
+    padding-top: 56px;
+    box-shadow: 14px 0px 9px -15px rgba(0,0,0,0.5);
+    transition: 0.35s ease-in;
+}
+.padding-left-s0{
+    padding-left: 0;
+    transition: 0.35s ease-in;
+}
+.left-m300{
+    transition: 0.35s ease-in;
+    left: -300px;
+}
+.sidebar-ui-list ul{
+    padding: 0;
+    margin: 0;
+}
+.sidebar-ui-list ul li{
+    list-style: none;
+}
+.sidebar-ui-list ul li a{
+    padding: 10px 15px;
+    color: #000;
+    display: block;
+    border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.search-component-bar{
+    padding: 15px 12px 15px;
+    border-bottom: 1px solid rgb(0,0,0);
+}
+
+
+.padding-lr-0{
+    padding-left: 0;
+    padding-right: 0;
+}
+.padding-left-3{
+    padding-left: 3px;
+} 
+.padding-right-3{
+    padding-right: 3px;
+}
+
+.padding-left-0{
+    padding-left: 0;
+  }
+  
+  .padding-right-0{
+    padding-right: 0;
+  }
+  
+  .padding-left-3{
+    padding-left: 3px;
+  }
+  
+  .padding-right-3px{
+    padding-right: 3px;
+  }
+
+
+
+.margin-right-20{
+    margin-right: 20px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+
+
+.margin-right-10{
+    margin-right: 10px;
+}
+
+
+.primary-btn
+{
+    height: 27px;
+    cursor: pointer;
+    font-size: 12px !important;
+    font-weight:600;
+    border-radius: 3px !important;
+    color: #FFF !important;
+    padding: 0px 10px;
+    border:1px solid #54a1ca !important;
+    background: -moz-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3CBBF3), color-stop(100%, #299ac7)); /* safari4+,chrome */
+    background: -webkit-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* ie10+ */
+    background: linear-gradient(0deg, #299ac7 0%, #3CBBF3 100%); /* w3c */
+}
+
+.primary-btn:hover,
+.primary-btn:focus{
+    color: #FFF;
+    background: -moz-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #299ac7), color-stop(100%, #3CBBF3)); /* safari4+,chrome */
+    background: -webkit-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* ie10+ */
+    background: linear-gradient(0deg, #3CBBF3 0%, #299ac7 100%); /* w3c */
+}
+
+
+  #countdown {
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+  }
+  
+  #countdown-number {
+    color: white;
+    display: inline-block;
+    line-height: 40px;
+  }
+  
+  svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+  }
+  
+  svg circle {
+    stroke-dasharray: 113px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 2px;
+    stroke: white;
+    fill: none;
+    animation: countdown 10s linear infinite forwards;
+  }
+  
+  @keyframes countdown {
+    from {
+      stroke-dashoffset: 0px;
+    }
+    to {
+      stroke-dashoffset: 113px;
+    }
+  }
+
+  footer{
+    background: #000;
+    color: #FFF;
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+    position: relative;
+    z-index: 9;
+  }
