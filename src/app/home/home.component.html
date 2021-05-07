@@ -36,9 +36,9 @@
                             <div class="clearfix"></div>
                             <div class="cart-container">
 
-                                <!-- <div class="cart-list" *ngIf="vaccinationSlotResponse && vaccinationSlotResponse?.centers">
+                                <!-- <div class="cart-list" *ngIf="vaccinationSlotCurrentResponse && vaccinationSlotCurrentResponse?.centers">
                                     <ul>
-                                        <li *ngFor="let center of vaccinationSlotResponse.centers; let i = index;">
+                                        <li *ngFor="let center of vaccinationSlotCurrentResponse.centers; let i = index;">
                                             <div class="cart-single">
                                                 <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
                                                 <div class="icon-syringe">
@@ -53,8 +53,8 @@
                                 <!-- bg-paid -->
 
                             <div class="cart-list">
-                                <ul *ngIf="vaccinationSlotResponse.centers">
-                                    <li *ngFor="let centre of vaccinationSlotResponse?.centers" [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
+                                <ul *ngIf="vaccinationSlotCurrentResponse.centers">
+                                    <li *ngFor="let centre of vaccinationSlotCurrentResponse?.centers" [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
                                         <div *ngIf = "centre.isValidCentre" >
                                         <div class="cart-single" [ngClass]="centre.fee_type=='Free'?'bg-free':'bg-paid'">
                                             <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
