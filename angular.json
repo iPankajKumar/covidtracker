@@ -29,6 +29,7 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/ng2-daterangepicker/assets/daterangepicker.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
             "scripts": [

@@ -23,8 +23,8 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <div class="button-area">
-                                            <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Slots</button>
-                                            <button type="button" class="btn-clear btn-primary common-btn margin-left-5">Clear All</button>
+                                            <button type="button" class="btn-clear btn-primary common-btn ">Clear All</button>
+                                            <button type="button" class="btn-change btn-primary common-btn margin-left-5" (click)="searchSlotModal()">Change Preference</button>
                                             <div class="clearfix"></div>
                                         </div>
                                         
@@ -49,13 +49,14 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </div> -->
-
+                                </div>  -->
+                                <!-- bg-paid -->
 
                             <div class="cart-list">
-                                <ul>
-                                    <li>
-                                        <div class="cart-single bg-free">
+                                <ul *ngIf="vaccinationSlotResponse.centers">
+                                    <li *ngFor="let centre of vaccinationSlotResponse?.centers" [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
+                                        <div *ngIf = "centre.isValidCentre" >
+                                        <div class="cart-single" [ngClass]="centre.fee_type=='Free'?'bg-free':'bg-paid'">
                                             <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
                                             <div class="icon-syringe">
                                                 <i class="fas fa-syringe"></i>
@@ -68,7 +69,7 @@
                                                                 <i class="far fa-hospital"></i>
                                                             </div>
                                                             <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
+                                                                {{centre.name}}
                                                             </div>
                                                             <div class="col-xl-4 custom-4 padding-lr-0">
                                                                
@@ -83,37 +84,37 @@
                                                                 <i class="fas fa-map-marker-alt"></i>
                                                             </div>
                                                             <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
+                                                                {{centre.address}}, {{centre.district_name}}, {{centre.pincode}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="vaccine-name">
+                                                <!-- <div class="vaccine-name">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-xl-1 padding-lr-0">
                                                                 <i class="fas fa-syringe"></i>
                                                             </div>
                                                             <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
+                                                                {{centre.fee_type}}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="max-capacity">
+                                                </div>  -->
+                                                 <div class="max-capacity">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-xl-1 padding-lr-0">
                                                                 <i class="fas fa-users"></i>
                                                             </div>
                                                             <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
+                                                                {{centre.availableSlotsCount}} sessions available
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
+                                                </div> 
+                                                <!-- <div class="container-fluid padding-lr-0">
                                                     <div class="row">
                                                         <div class="col-xl-4 padding-right-0">
                                                             <div class="dateVaccine">
@@ -145,779 +146,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                </div>
+                                                </div> -->
                                                 <div class="clearfix"></div>    
                                             </div>
                                         </div>
+                                    </div>
+                                
                                     </li>
-                                    <li>
-                                        <div class="cart-single bg-paid">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-free">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-free">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-paid">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-free">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-free">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-paid">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-single bg-free">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Delhi Cantt Gen Hosp. Site 2
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Sadar Bajar Road Opp Police Station Kabul Line Delhi Cantonment 10, New Delhi, 110010
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="vaccine-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                COVISHIELD
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                Available Capacity 50
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="clearfix"></div>    
-                                            </div>
-                                        </div>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                             <div class="clearfix"></div>
@@ -944,11 +180,9 @@
       <div class="modal-body">
         Welcome
         <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it 
-            to make a type specimen book. It has survived not only five centuries, 
-            but also the leap into electronic typesetting, remaining essentially unchanged. 
+            These are unsettling times and COVID-19 is clearing impacting our personal and professional lives, and those that we love.
+            Please take care, stay positive (covid -ve) and keep smiling. We will get through this, together.
+            Having said that, we welcome you to this volunteer initiative, please choose your desired pin-codes and date and we'll take it from there so that you can spend that extra time with your loved one's.
         </p>
       </div>
       <!-- Modal footer -->
@@ -1051,24 +285,24 @@
                     </div>
                     <div class="col-xl-8">
                         <div class="form-group">
-                            <label>Age Categories</label>
+                            <label>Age Group</label>
                             <div class="margin-top-8">
                                 <p-radioButton 
                                     name="age" 
-                                    value="18 to 44" 
+                                    value="0" 
                                     [(ngModel)]="ageCategory" 
                                     inputId="ageCategory1"
                                     >
                                 </p-radioButton>
-                                <span for="city1" class="margin-left-5 margin-right-60">18 to 44</span>
+                                <span for="city1" class="margin-left-5 margin-right-60">18+</span>
 
                                 <p-radioButton 
                                     name="age" 
-                                    value="Above 44" 
+                                    value="1" 
                                     [(ngModel)]="ageCategory" 
                                     inputId="ageCategory2">
                                 </p-radioButton>
-                                <span for="city2" class="margin-left-5">Above 44</span>
+                                <span for="city2" class="margin-left-5">45+</span>
                             </div>
                         </div>
                     </div>
@@ -1080,7 +314,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn-search-all common-btn" (click)="slotsByPincodeAndDate();">Search</button>
+          <button type="button" class="btn-search-all common-btn" (click)="slotsByPincodeAndDate();hideModalSearch()">Search</button>
         </div>
     
       </div>
