@@ -3,10 +3,12 @@
     <div class="container-fluid">
         <div class="row width-100p">
           <div class="col-xl-12 padding-lr-0">
-            <button class="btn-sidebar" (click)="toggleSidebar()" type="button">
+            <!-- <button class="btn-sidebar" (click)="toggleSidebar()" type="button">
               <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">Vaccination Slot</a>
+            </button> -->
+            <a class="navbar-brand" href="#">
+              <img src="../assets/images/covid-logo.png"/>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -15,9 +17,9 @@
     </div>
   </nav>
 </header>
-<div class="container-fluid">
+<div class="container-fluid padding-lr-0">
   <div class="main-container">
-    <div class="sidebar-ui-list" [ngClass]="(opened==true)?'left-m300':''">
+    <!-- <div class="sidebar-ui-list" [ngClass]="(opened==true)?'left-m300':''">
       <div class="search-component-bar">
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
@@ -27,8 +29,8 @@
         <ul>
             <li><a routerLink="">Home</a></li>
         </ul>
-    </div>
-    <div class="component-container" [ngClass]="(opened==true)?'padding-left-s0':'padding-left-300'">
+    </div> -->
+    <div class="component-container">
       <router-outlet></router-outlet> 
     </div>
   </div>

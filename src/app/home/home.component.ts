@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
 import * as AllIndiaPincodes from '../../assets/json/AllIndiaPincodes.json';
 import { debounceTime } from 'rxjs/operators';
 import { HttpClient } from "@angular/common/http";
-
+import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,7 +17,12 @@ export class HomeComponent implements OnInit {
   areaCode: any[] = [];
   selectedCodes: string[] = [];
   http: any;
-  constructor(private httpClient :HttpClient) {
+  modalRef: BsModalRef;
+  config = {
+    animated: true
+  };
+  constructor(private httpClient :HttpClient,private modalService: BsModalService) {
+    this.timerCount(5);
   }
   dateValueSingle: Date;
   dateValueFrom: Date;
@@ -28,6 +33,26 @@ export class HomeComponent implements OnInit {
   timer = 0;
   sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
   vaccinationSlotUrl = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=";
+  ageCategory: string;
+
+
+  isModalShown = true;
+  isSearchModalShown = false;
+  @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
+  @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
+  hideModal() {
+    this.autoShownModal.hide();
+  }
+  hideModalSearch(){
+    this.searchModal.hide();
+  }
+  openModalSearch() {
+    this.isSearchModalShown = true;
+    this.autoShownModal.hide();
+  }
+  searchSlotModal() {
+    this.searchModal.show();
+  }
   ngOnInit() {
     //Get unique states
     var indianState = [...new Set(AllIndiaPincodes['default'].map(item => item.STATENAME))];
@@ -59,6 +84,8 @@ export class HomeComponent implements OnInit {
   }
 
   async slotsByPincodeAndDate() {
+    
+    this.isSearchModalShown = false;
     console.log("Trial counter", this.trialCounter++);
     this.dateArrray=[];
     this.dateArrray.push(this.dateValueSingle);
@@ -91,5 +118,32 @@ export class HomeComponent implements OnInit {
     setInterval(function () {
       myThis.slotsByPincodeAndDate();
     }, 30000);
+  }
+
+  display: any;
+  timerCount(minute) {
+    // let minute = 1;
+    let seconds: number = minute * 60;
+    let textSec: any = "0";
+    let statSec: number = 60;
+
+    const prefix = minute < 10 ? "0" : "";
+
+    const timer = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 59;
+
+      if (statSec < 10) {
+        textSec = "0" + statSec;
+      } else textSec = statSec;
+
+      this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
+
+      if (seconds == 0) {
+        console.log("finished");
+        clearInterval(timer);
+      }
+    }, 1000);
   }
 }

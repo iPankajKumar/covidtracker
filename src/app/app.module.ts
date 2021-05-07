@@ -7,11 +7,11 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {CalendarModule} from 'primeng/calendar';
-
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 import { Pipe, PipeTransform } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 @Pipe({
   name: "sort"
 })
@@ -44,7 +44,9 @@ export class ArraySortPipe {
     MultiSelectModule,
     CalendarModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    RadioButtonModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
