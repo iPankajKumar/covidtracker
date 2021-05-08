@@ -1,27 +1,26 @@
-# covidtracker
+# Covid Tracker India
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.29.
+This project is an initiative taken by volunteers to help everyone search vaccination slots in a better and effient way with least hard work, you can choose your preferences and we'll do the hard work for you.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![How to use  - Animated gif demo](demo/demo.gif)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Technologies Used
+* [Angular 8](https://angular.io/)
+* [jQuery](https://jquery.com/)
+* [Bootstrap](http://getbootstrap.com/)
+* [Typescript](https://www.typescriptlang.org/)
 
-## Running unit tests
+## APIs Used
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* [Co-WIN Public APIs](https://apisetu.gov.in/public/marketplace/api/cowin/cowin-public-v2#/Appointment%20Availability%20APIs/calendarByPin) see [API Terms of Service](https://apisetu.gov.in/public/marketplace/api/cowin/terms.php)
 
-## Running end-to-end tests
+## License
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+The code in this project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Note that you will be responsible for following terms of service of the third party APIs used in the code, we take no responisbilty of forked or cloned projects. 
