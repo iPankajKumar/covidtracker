@@ -168,7 +168,7 @@ export class HomeComponent implements OnInit {
     let myThis = this;
     setInterval(function () {
       myThis.slotsByPincodeAndDate();
-    }, 300000);
+    }, 360000);
   }
 
   validCenters() {
