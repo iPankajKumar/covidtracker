@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-tile',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleTileComponent implements OnInit {
 
-  constructor() { }
+  selectedCentre:any;
+  constructor(private router: Router,public activatedRoute: ActivatedRoute) {
+    this.selectedCentre = this.router.getCurrentNavigation().extras.state.sessionData;
+    console.log("data",this.selectedCentre);
+  }
 
   ngOnInit() {
+   
   }
 
 }

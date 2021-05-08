@@ -4,6 +4,7 @@ import * as AllIndiaPincodes from '../../assets/json/AllIndiaPincodes.json';
 import { HttpClient } from "@angular/common/http";
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,7 +22,9 @@ export class HomeComponent implements OnInit {
   config = {
     animated: true
   };
-  constructor(private httpClient: HttpClient, private modalService: BsModalService, private toastr: ToastrService) {
+  isValidCenter:boolean = false;
+  constructor(private httpClient: HttpClient, private modalService: BsModalService, 
+    private toastr: ToastrService, private router : Router) {
     this.timerCount(5);
   }
   dateValueSingle: Date;
@@ -40,6 +43,15 @@ export class HomeComponent implements OnInit {
   
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
+  
+  ngOnInit() {
+    this.fetchStates();
+
+  }
+
+  clearAll(){
+    this.vaccinationSlotAllResponse = [];
+  }
   hideModal() {
     this.autoShownModal.hide();
   }
@@ -53,9 +65,9 @@ export class HomeComponent implements OnInit {
   searchSlotModal() {
     this.searchModal.show();
   }
-  ngOnInit() {
-    this.fetchStates();
 
+  navigateToSessions(sessionObject) {
+    this.router.navigate(['singleTile'], { state: { sessionData: sessionObject } });
   }
 
   fetchStates() {
@@ -106,9 +118,8 @@ export class HomeComponent implements OnInit {
 
       case 'info':
         this.toastr.info(title, message, {
-          timeOut: 50000000,
-          positionClass: 'toast-top-center',
-          extendedTimeOut:50000000000
+          timeOut: 9000,
+          positionClass: 'toast-top-center'
         });
         break;
 
@@ -152,7 +163,7 @@ export class HomeComponent implements OnInit {
     let myThis = this;
     setInterval(function () {
       myThis.slotsByPincodeAndDate();
-    }, 60000);
+    }, 300000);
   }
 
   validCenters() {
@@ -184,6 +195,7 @@ export class HomeComponent implements OnInit {
         //Add current centers to global centers to concat rest response
         if (this.vaccinationSlotAllResponse.length > 0) {
           let centreExists = this.checkIfCentreExists(this.vaccinationSlotCurrentResponse.centers[centre]);
+          
           if (centreExists) {
 
             this.updateCentre(this.vaccinationSlotCurrentResponse.centers[centre]);
@@ -198,8 +210,8 @@ export class HomeComponent implements OnInit {
 
       }
     }
-
-    if (!this.vaccinationSlotAllResponse.length) {
+    this.isValidCenter = this.isCenterValid();
+    if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
       this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
     }
     console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
@@ -229,6 +241,19 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /**
+   * checkAvailableSlots
+   */
+  public isCenterValid():boolean {
+    let found = false;
+    this.vaccinationSlotAllResponse.forEach(function (item) {
+      if (item.isValidCentre) {
+        found = true;
+        return found;
+      }
+    });
+    return found;
+  }
 
   display: any;
   timerCount(minute) {

@@ -24,7 +24,7 @@
                                     <div class="col-xl-4">
                                         <div class="button-area">
                                             <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Preference</button>
-                                            <button type="button" [disabled]="vaccinationSlotAllResponse.length == 0" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
+                                            <button type="button" (click)="clearAll()" [disabled]="vaccinationSlotAllResponse.length == 0" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
                                             <div class="clearfix"></div>
                                         </div>
 
@@ -54,7 +54,7 @@
 
                                 <div class="cart-list">
                                     <ul *ngIf="vaccinationSlotAllResponse">
-                                        <li [routerLink]="['/singleTile']" *ngFor="let centre of vaccinationSlotAllResponse"
+                                        <li (click)="navigateToSessions(centre)" *ngFor="let centre of vaccinationSlotAllResponse"
                                             [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
                                             <div *ngIf="centre.isValidCentre">
                                                 <div class="cart-single"

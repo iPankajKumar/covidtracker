@@ -310,10 +310,14 @@ header .navbar.bg-light {
     bottom: 3px;
 }
 .singleTileData .cart-single{
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
     width: 515px;
     padding-right: 110px;
     margin-left: 0;
+    margin: auto;
+}
+.table-data{
+    text-align: center;
 }
 .singleTileData .cart-single:hover{
     transition: all .5s;
