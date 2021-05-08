@@ -1,9 +1,14 @@
-.panel-header-main{
-    padding: 10px 20px;
-    background: #E91D26;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border: 1px solid #E91D26;
+.top-strip{
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    padding: 20px 30px;
+    background: #FFF;
+    z-index: 9;
+    -webkit-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+    box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
 }
 .title{
     font-size: 22px;
@@ -13,20 +18,8 @@
 .button-area{
     float: right;
 }
-.btn-primary{
-    background: #000;
-    color: #FFF;
-    font-size: 16px;
-    padding: 8px 25px;
-    border-radius: 5px;
-}
-.btn-search-all{
-    background: #000;
-    color: #FFF;
-    font-size: 16px;
-    padding: 8px 25px;
-    border-radius: 5px;
-}
+
+
 .circle-animation{
     width: 150px;
     height: 150px;
@@ -47,6 +40,9 @@
     margin-bottom: 15px;
 }
 .cart-container{
+    margin-top: 70px;
+    height: calc(100vh - 220px);
+    overflow-y: scroll;
     padding-top: 30px;
 }
 /* .cart-list{
@@ -60,32 +56,36 @@
 }
 
 .cart-list ul li{
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     list-style: none;
     width: 33.33%;
     float: left;
 }
 
 .timerCount{
-    font-size: 20px;
+    font-size: 18px;
     width: 100px;
     padding: 5px 10px;
     text-align: center;
-    background: #000;
-    color: #FFF;
+    background: #35b4ff;
+    color: #ffffff;
+    line-height: 30px;
     border-radius: 5px;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(53,180,255, 0.7);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(53,180,255, 0.7);
+	        box-shadow: 0 8px 6px -6px rgba(53,180,255, 0.7);
 }
 .timerCount i{
     float:left;
     margin-right: 10px;
-    font-size: 20px; 
+    font-size: 18px; 
     position: relative;
-    top: 5px;
+    top: 3px;
 }
 
 .suggestions{
     padding: 6px 0;
-    width: 165px;
+    width: 170px;
     margin: auto;
 }
 .notes{
@@ -104,136 +104,13 @@
     border-radius: 4px;
 }
 
-.bg-free, .free {
-    background-color: #15b140 !important;
-}
-.bg-paid, .paid {
-    background-color: #fb6322 !important;
-}
 
-.cart-single{
-    border-radius: 10px;
-    color: #FFF;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-    margin: 0 15px;
-    padding: 15px 20px 20px;
-}
-.gradient-bx{
-    position: relative;
-    z-index: 1;
-}
-.cart-single:after,
-.gradient-bx:after {
-    position: absolute;
-    z-index: -1;
-    height: 100%;
-    width: 50%;
-    top: 0;
-    right: 0;
-    content: "";
-    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.35) 0%, rgba(125, 185, 232, 0) 100%);
-    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.35) 0%, rgba(125, 185, 232, 0) 100%);
-    background: linear-gradient(to left, rgba(255, 255, 255, 0.35) 0%, rgba(125, 185, 232, 0) 100%);
-}
-
-
-.cart-single .center-name{
-    font-size: 18px;
-    padding-bottom: 10px;
-    font-weight: 600;
-}
-
-
-.cart-single .center-address{
-    font-size: 14px;
-    padding-bottom: 2px;
-}
-.cart-single .vaccine-name,
-.cart-single .agelimit,
-.cart-single .max-capacity{
-    font-size: 14px;
-    padding-bottom: 2px;
-}
-.cart-single .time,
-.cart-single .dateVaccine{
-    font-size: 12px;
-}
-.margin-right-5{
-    margin-right: 5px;
-}
-.cart-data .col-xl-1{
-    flex: 0 0 25px;
-    max-width: 25px;
-    margin-right: 5px;
-    text-align: center;
-}
-
-.cart-data .dateVaccine .col-xl-11.col-cust-11{
-    flex: 0 0 85px;
-    max-width: 85px;
-}
-.cart-data .time .col-xl-11.col-cust-11{
-    flex: 0 0 140px;
-    max-width: 140px;
-}
-.cart-data .col-xl-7 {
-    flex: 0 0 65%;
-    max-width: 65%;
-}
-.cart-data .custom-4.col-xl-4 {
-    flex: 0 0 30%;
-    max-width: 30%;
-}
-.cart-data .col-xl-11 {
-    flex: 0 0 91%;
-    max-width: 91%;
-}
-
-.one-line-data .col-xl-1{
-    flex: 0 0 45px;
-    max-width: 45px;
-    text-align: center;
-}
-.one-line-data .col-xl-11{
-    flex: 0 0 175px;
-    max-width: 175px;
-}
 .common-width-33{
     width: 240px;
     float: left;
 }
 
 
-.close-cart{
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    color: white;
-    opacity: 0.5;
-    transition: 0.35s ease-in;
-}
-.close-cart:hover{
-    opacity: 1;
-    transition: 0.35s ease-in;
-}
-.icon-syringe{
-    position: absolute;
-    bottom: 0;
-    margin: auto;
-    color: #eceaea;
-    font-size: 60px;
-    right: 27px;
-    opacity: 0.5;
-    transition: 0.75s ease-in;
-}
-.cart-single:hover .icon-syringe{
-    right: 40px;
-    font-size: 80px;
-    opacity: 0.7;
-    transition: 0.75s ease-in;
-}
 
 .margin-bottom-40{
     margin-bottom: 30px;
@@ -241,7 +118,7 @@
 
 .modal-search .modal-header {
     padding: 10px 15px;
-    background: #147eac !important;
+    background: #369DC9 !important;
     
 }
 .modal-search .modal-title {
@@ -320,25 +197,6 @@ body .ui-multiselect .ui-multiselect-label {
     padding: 0;
     padding-right: 20px;
 }
-::-webkit-scrollbar {
-    width:7px; 
-    background:#e6e6e6;   
-   }
-  
-  ::-webkit-scrollbar-thumb {
-    overflow:visible; 
-    border-radius:4px; 
-    border: solid 1px #A6A6A6; 
-    background:#999;
-    position: relative;
-    overflow: hidden;
-    border: solid 1px #7a7a7a;
-    border-top-left-radius: 4px 4px;
-    border-top-right-radius: 4px 4px;
-    border-bottom-right-radius: 4px 4px;
-    border-bottom-left-radius: 4px 4px;
-  }
-
   
   #timer {
     width: 100px;

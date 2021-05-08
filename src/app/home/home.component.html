@@ -5,7 +5,7 @@
                 <div class="container-fluid padding-lr-0">
                     <div class="row">
                         <div class="col-xl-12">
-                            <div class="container-fluid">
+                            <div class="container-fluid top-strip">
                                 <div class="row">
                                     <div class="col-xl-4">
                                         <div class="timerCount">
@@ -23,11 +23,8 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <div class="button-area">
-                                            <button type="button" class="btn-clear btn-primary common-btn ">Clear
-                                                All</button>
-                                            <button type="button"
-                                                class="btn-change btn-primary common-btn margin-left-5"
-                                                (click)="searchSlotModal()">Change Preference</button>
+                                            <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Preference</button>
+                                            <button type="button" [disabled]="vaccinationSlotAllResponse.length == 0" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
                                             <div class="clearfix"></div>
                                         </div>
 
@@ -57,7 +54,7 @@
 
                                 <div class="cart-list">
                                     <ul *ngIf="vaccinationSlotAllResponse">
-                                        <li *ngFor="let centre of vaccinationSlotAllResponse"
+                                        <li [routerLink]="['/singleTile']" *ngFor="let centre of vaccinationSlotAllResponse"
                                             [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
                                             <div *ngIf="centre.isValidCentre">
                                                 <div class="cart-single"
@@ -117,7 +114,7 @@
                                                                     </div>
                                                                     <div class="col-xl-11 padding-lr-0">
                                                                         {{centre.availableSlotsCount}} sessions
-                                                                        available
+                                                                        available <span class="btn-view-more" [routerLink]="['/singleTile']"><i class="far fa-eye"></i> View slots</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -175,8 +172,7 @@
 </div>
 
 
-<div *ngIf="isModalShown" [config]="{ show: true }" bsModal #autoShownModal="bs-modal"
-    class="modal modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+<div [config]="{ show: true }" bsModal #autoShownModal="bs-modal" class="modal modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header gradient-bx">
@@ -197,16 +193,14 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn-search-all common-btn" (click)="openModalSearch(searchModal);">Search
+                <button type="button" class="btn-search-all btn-primary common-btn" (click)="openModalSearch()">Search
                     Slots</button>
             </div>
         </div>
     </div>
 </div>
 
-<div *ngIf="isSearchModalShown" [config]="{ show: true }" bsModal #searchModal="bs-modal"
-    class="modal modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-
+<div bsModal #searchModal="bs-modal" class="modal modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
@@ -227,16 +221,16 @@
                                 <div class="form-group">
                                     <label>State</label>
                                     <!-- <div>
-                                <p-dropdown 
-                                    [options]="indianStates" 
-                                    [(ngModel)]="selectedCity1" 
-                                    placeholder="Select a State" 
-                                    [filter]="true"
-                                    [showClear]="true"
-                                    (ngModelChange)="fetchCities($event.target.value)"
-                                    >
-                                </p-dropdown>
-                            </div> -->
+                                        <p-dropdown 
+                                            [options]="indianStates" 
+                                            [(ngModel)]="selectedCity1" 
+                                            placeholder="Select a State" 
+                                            [filter]="true"
+                                            [showClear]="true"
+                                            (ngModelChange)="fetchCities($event.target.value)"
+                                            >
+                                        </p-dropdown>
+                                    </div> -->
                                     <select class="form-control" (change)="fetchCities($event.target.value)">
                                         <option disabled selected>Select State</option>
                                         <option *ngFor="let state of indianStates | sort" [value]="state">{{state}}
@@ -313,11 +307,10 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn-search-all common-btn"
+                <button type="button" class="btn-search-all btn-primary common-btn"
                     (click)="slotsByPincodeAndDate();hideModalSearch()">Search</button>
             </div>
 
         </div>
     </div>
-
 </div>

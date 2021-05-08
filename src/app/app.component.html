@@ -1,8 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container-fluid padding-lr-0">
         <div class="row width-100p">
-          <div class="col-xl-12 padding-lr-0">
+          <div class="col-xl-5">
             <!-- <button class="btn-sidebar" (click)="toggleSidebar()" type="button">
               <span class="navbar-toggler-icon"></span>
             </button> -->
@@ -12,6 +12,11 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
+          </div>
+          <div class="col-xl-7 padding-right-0">
+            <div class="book-btn">
+                <a href="https://www.cowin.gov.in/home" target="_blank" class="btn-book-slot btn-primary common-btn">Book Your Slot</a>
+            </div>
           </div>
         </div>
     </div>
@@ -38,11 +43,21 @@
 <footer>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xl-12">
-          <div class="footer-content">
-           Copyright © 2021<script>document.write(new Date().getFullYear())</script> All Rights Reserved
+      <div class="col-xl-4">
+          <div class="footer-left-content">
+           Copyright © 2021<script>{{document.write(new Date().getFullYear())}}</script> All Rights Reserved
           </div>
       </div>
+      <div class="col-xl-4">
+        <div class="footer-center-content">
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="footer-right-content">
+          Made with <i class="fas fa-heart"></i> by volunteers
+      </div>
+  </div>
     </div>
   </div>
 </footer>

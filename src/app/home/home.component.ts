@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit {
   ageCategory: number = 0;
 
 
-  isModalShown = true;
-  isSearchModalShown = false;
+  
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   hideModal() {
@@ -48,11 +47,10 @@ export class HomeComponent implements OnInit {
     this.searchModal.hide();
   }
   openModalSearch() {
-    this.isSearchModalShown = true;
+    this.searchModal.show();
     this.autoShownModal.hide();
   }
   searchSlotModal() {
-
     this.searchModal.show();
   }
   ngOnInit() {
@@ -108,15 +106,16 @@ export class HomeComponent implements OnInit {
 
       case 'info':
         this.toastr.info(title, message, {
-          timeOut: 9000,
-          positionClass: 'toast-top-center'
+          timeOut: 50000000,
+          positionClass: 'toast-top-center',
+          extendedTimeOut:50000000000
         });
         break;
 
       case 'error':
         this.toastr.error(title, message, {
           timeOut: 9000,
-          positionClass: 'toast-top-center'
+          positionClass: 'toast-top-center',
         });
         break;
 
@@ -130,7 +129,7 @@ export class HomeComponent implements OnInit {
   async slotsByPincodeAndDate() {
 
     this.vaccinationSlotCurrentResponse = [];
-    this.isSearchModalShown = false;
+    this.searchModal.hide();
     console.log("Trial counter", this.trialCounter++);
     this.dateArrray = [];
     this.dateArrray.push(this.dateValueSingle);

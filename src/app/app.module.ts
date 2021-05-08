@@ -12,6 +12,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { Pipe, PipeTransform } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
+
+import {TableModule} from 'primeng/table';
+import { SingleTileComponent } from './single-tile/single-tile.component';
+
 @Pipe({
   name: "sort"
 })
@@ -34,7 +38,8 @@ export class ArraySortPipe {
   declarations: [
     AppComponent,
     HomeComponent,
-    ArraySortPipe
+    ArraySortPipe,
+    SingleTileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ export class ArraySortPipe {
     RadioButtonModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,10 +7,84 @@ button:focus{
     outline: none;
 }
 
+.ng-star-inserted:focus{
+    outline: none;
+}
+
+
+@font-face {
+    font-family: 'montserratthin';
+    src: url('assets/fonts/montserrat-thin-webfont.woff2') format('woff2'),
+         url('assets/fonts/montserrat-thin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'montserratbold';
+    src: url('assets/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+         url('assets/fonts/montserrat-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'montserratlight';
+    src: url('assets/fonts/montserrat-light-webfont.woff2') format('woff2'),
+         url('assets/fonts/montserrat-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'montserratmedium';
+    src: url('assets/fonts/montserrat-medium-webfont.woff2') format('woff2'),
+         url('assets/fonts/montserrat-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'montserratregular';
+    src: url('assets/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+         url('assets/fonts/montserrat-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'montserratsemibold';
+    src: url('assets/fonts/montserrat-semibold-webfont.woff2') format('woff2'),
+         url('assets/fonts/montserrat-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 body{
     font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    
+    font-family: 'montserratregular';
 }
 .common-btn{
     background: transparent;
@@ -23,6 +97,11 @@ header{
     -webkit-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
     -moz-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
     box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
 }
 header .navbar-light .navbar-brand{
     width: 270px;
@@ -35,7 +114,7 @@ header .navbar-light .navbar-brand img{
     width: 100%;
 }
 header .navbar.bg-light {
-    background-color: #f8f9fa !important;
+    background-color: #e0efff !important;
     
 }
 
@@ -54,6 +133,7 @@ header .navbar.bg-light {
 
 .main-container{
     position: relative;
+    padding-top: 73px;
 }
 .component-container{
     padding: 15px 0;
@@ -100,7 +180,9 @@ header .navbar.bg-light {
     border-bottom: 1px solid rgb(0,0,0);
 }
 
-
+.margin-left-10{
+    margin-left: 10px;
+}
 .padding-lr-0{
     padding-left: 0;
     padding-right: 0;
@@ -145,85 +227,277 @@ header .navbar.bg-light {
 }
 
 
-.primary-btn
-{
-    height: 27px;
-    cursor: pointer;
-    font-size: 12px !important;
-    font-weight:600;
-    border-radius: 3px !important;
-    color: #FFF !important;
-    padding: 0px 10px;
-    border:1px solid #54a1ca !important;
-    background: -moz-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* ff3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3CBBF3), color-stop(100%, #299ac7)); /* safari4+,chrome */
-    background: -webkit-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* opera 11.10+ */
-    background: -ms-linear-gradient(90deg, #299ac7 0%, #3CBBF3 100%); /* ie10+ */
-    background: linear-gradient(0deg, #299ac7 0%, #3CBBF3 100%); /* w3c */
-}
-
-.primary-btn:hover,
-.primary-btn:focus{
+.btn-primary{
+    background: #2953E8;
     color: #FFF;
-    background: -moz-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* ff3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #299ac7), color-stop(100%, #3CBBF3)); /* safari4+,chrome */
-    background: -webkit-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* opera 11.10+ */
-    background: -ms-linear-gradient(90deg, #3CBBF3 0%, #299ac7 100%); /* ie10+ */
-    background: linear-gradient(0deg, #3CBBF3 0%, #299ac7 100%); /* w3c */
+    font-size: 16px;
+    padding: 8px 22px;
+    border-radius: 5px;
+    border: 1px solid rgb(41, 83, 232);
+    text-align: center;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	        box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+}
+.btn-primary:hover,
+.btn-primary:focus{
+    border: 1px solid rgb(41, 83, 232);
+    transition: 0.35s ease-in;
+    background: transparent;
+    color: #2953E8;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	        box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+}
+
+.btn-secondary{
+    background: transparent;
+    color: #2953E8;
+    font-size: 16px;
+    padding: 8px 22px;
+    border-radius: 5px;
+    border: 1px solid rgb(41, 83, 232);
+    text-align: center;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	        box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus{
+    border: 1px solid rgb(41, 83, 232);
+    transition: 0.35s ease-in;
+    background: #2953E8;
+    color: #FFF;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+	        box-shadow: 0 8px 6px -6px rgba(41, 83, 232, 0.4);
+}
+.btn-secondary.disabled, 
+.btn-secondary:disabled {
+    color: #fff;
+    background-color: #9d9e9e;
+    border-color: #9d9e9e;
+    pointer-events: none;
+}
+.book-btn{
+    padding-top: 12px;
+    float: right;
+}
+
+.btn-book-slot{
+    display: block;
+    width: 168px;
 }
 
 
-  #countdown {
+.cart-single{
+    cursor: pointer;
+    border-radius: 10px;
+    color: #FFF;
+    overflow: hidden;
     position: relative;
-    margin: auto;
-    margin-top: 100px;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-  }
-  
-  #countdown-number {
-    color: white;
-    display: inline-block;
-    line-height: 40px;
-  }
-  
-  svg {
+    z-index: 1;
+    margin: 0 15px;
+    padding: 15px 20px 20px;
+    transition: all .5s;
+    height: 150px;
+}
+
+.cart-single:hover{
+    transition: all .5s;
+    transform: translateY(-8px);
+    bottom: 3px;
+}
+.singleTileData .cart-single{
+    margin-bottom: 30px;
+    width: 515px;
+    padding-right: 110px;
+    margin-left: 0;
+}
+.singleTileData .cart-single:hover{
+    transition: all .5s;
+    transform: translateY(0px);
+    bottom: 0;
+}
+.gradient-bx{
+    position: relative;
+    z-index: 1;
+}
+.cart-single:after,
+.gradient-bx:after {
     position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
     top: 0;
     right: 0;
-    width: 40px;
-    height: 40px;
-    transform: rotateY(-180deg) rotateZ(-90deg);
-  }
+    content: "";
+    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.35) 0%, rgba(125, 185, 232, 0) 100%);
+    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.35) 0%, rgba(125, 185, 232, 0) 100%);
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.35) 0%, rgba(125, 185, 232, 0) 100%);
+}
+
+
+.cart-single .center-name{
+    font-size: 18px;
+    padding-bottom: 8px;
+    font-family: 'montserratsemibold';
+}
+
+
+.cart-single .center-address{
+    font-size: 13px;
+    padding-bottom: 3px;
+}
+.cart-single .vaccine-name,
+.cart-single .agelimit,
+.cart-single .max-capacity{
+    font-size: 12px;
+    padding-bottom: 3px;
+
+}
+
+.cart-single .max-capacity{
+    font-family: 'montserratsemibold';
+}
+.cart-single .time,
+.cart-single .dateVaccine{
+    font-size: 12px;
+}
+.margin-right-5{
+    margin-right: 5px;
+}
+.cart-data .col-xl-1{
+    flex: 0 0 25px;
+    max-width: 25px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.cart-data .dateVaccine .col-xl-11.col-cust-11{
+    flex: 0 0 85px;
+    max-width: 85px;
+}
+.cart-data .time .col-xl-11.col-cust-11{
+    flex: 0 0 140px;
+    max-width: 140px;
+}
+.cart-data .col-xl-7 {
+    flex: 0 0 65%;
+    max-width: 65%;
+}
+.cart-data .custom-4.col-xl-4 {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+.cart-data .col-xl-11 {
+    flex: 0 0 91%;
+    max-width: 91%;
+}
+
+.one-line-data .col-xl-1{
+    flex: 0 0 45px;
+    max-width: 45px;
+    text-align: center;
+}
+.one-line-data .col-xl-11{
+    flex: 0 0 175px;
+    max-width: 175px;
+}
   
-  svg circle {
-    stroke-dasharray: 113px;
-    stroke-dashoffset: 0px;
-    stroke-linecap: round;
-    stroke-width: 2px;
-    stroke: white;
-    fill: none;
-    animation: countdown 10s linear infinite forwards;
-  }
-  
-  @keyframes countdown {
-    from {
-      stroke-dashoffset: 0px;
-    }
-    to {
-      stroke-dashoffset: 113px;
-    }
-  }
+.toast-container.toast-top-center .ngx-toastr, .toast-container.toast-bottom-center .ngx-toastr {
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.bg-free, .free {
+    background-color: #15b140 !important;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(22,177,65, 1);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(22,177,65, 1);
+	        box-shadow: 0 8px 6px -6px rgba(22,177,65, 1);
+}
+.bg-paid, .paid {
+    background-color: #fb6322 !important;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(251,99,35, 1);
+	   -moz-box-shadow: 0 8px 6px -6px rgba(251,99,35, 1);
+	        box-shadow: 0 8px 6px -6px rgba(251,99,35, 1);
+}
+.btn-view-more{
+    background: rgba(255,255,255,0.3);
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-family: 'montserratsemibold';
+}
+.close-cart{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: white;
+    opacity: 0.5;
+    transition: 0.35s ease-in;
+}
+.close-cart:hover{
+    opacity: 1;
+    transition: 0.35s ease-in;
+}
+.icon-syringe{
+    position: absolute;
+    bottom: -12px;
+    margin: auto;
+    color: #eceaea;
+    font-size: 60px;
+    right: 12px;
+    opacity: 0.5;
+    transition: 0.75s ease-in;
+}
+.cart-single:hover .icon-syringe{
+    right: 18px;
+    font-size: 65px;
+    opacity: 0.7;
+    transition: 0.75s ease-in;
+}
+
+body .singleTileData .ui-table .ui-table-thead > tr > th {
+    padding: 10px;
+    border: 1px solid #15b140;
+    font-family: 'montserratsemibold';
+    font-weight: normal;
+    color: #FFF;
+    background-color: #15b140;
+}
 
   footer{
     background: #000;
     color: #FFF;
-    text-align: center;
-    padding: 15px;
-    font-size: 16px;
+    padding:5px 15px;
+    font-size: 14px;
     position: relative;
     z-index: 9;
+  }
+  .footer-left-content{
+    padding-top: 7px;
+  }
+  .footer-center-content{
+    text-align: center;
+  }
+
+  .footer-center-content a{
+    color: #FFF;
+    font-size: 23px;
+    padding-top: 3px;
+    display: block;
+  }
+
+  .footer-right-content{
+    text-align: right;
+    padding-top: 7px;
+  }
+
+  .footer-right-content i{
+    color: #f32c2c;
   }
