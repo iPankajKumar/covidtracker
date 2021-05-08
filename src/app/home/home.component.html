@@ -8,14 +8,14 @@
                             <div class="container-fluid top-strip">
                                 <div class="row">
                                     <div class="col-xl-4">
-                                        <div class="timerCount">
+                                        <div class="timerCount" *ngIf="isValidCenter">
                                             <i class="fas fa-stopwatch"></i>
                                             <span>{{display}}</span>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
                                     <div class="col-xl-4">
-                                        <div class="suggestions">
+                                        <div class="suggestions" *ngIf="isValidCenter">
                                             <div class="notes"><span class="free"></span> Free</div>
                                             <div class="notes"><span class="paid"></span> Paid</div>
                                             <div class="clearfix"></div>

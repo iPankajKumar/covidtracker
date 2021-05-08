@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
 
   clearAll(){
     this.vaccinationSlotAllResponse = [];
+    this.isValidCenter = this.isCenterValid();
   }
   hideModal() {
     this.autoShownModal.hide();
