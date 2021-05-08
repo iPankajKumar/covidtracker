@@ -38,15 +38,15 @@ export class HomeComponent implements OnInit {
   sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
   vaccinationSlotUrlByPinCode = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=";
   ageCategory: number = 0;
+  resetCityDropdown: number = -1;
 
 
-  
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   
   ngOnInit() {
     this.fetchStates();
-
+    
   }
 
   clearAll(){
@@ -73,6 +73,8 @@ export class HomeComponent implements OnInit {
 
   fetchStates() {
     //Get unique states
+    this.indianCities = [];
+    this.indianStates = [];
     var indianState = [...new Set(AllIndiaPincodes['default'].map(item => item.STATENAME))];
     //Sort states alphabetically.
     this.indianStates = indianState.sort((a: any, b: any) => a.localeCompare(b));
@@ -80,21 +82,23 @@ export class HomeComponent implements OnInit {
 
   fetchCities(stateName: string) {
     this.indianCities = [];
+    this.areaCode = [];
+    this.resetCityDropdown = -1;
     var allIndiaStates = AllIndiaPincodes['default'];
     //get all cities 
     var queryData = allIndiaStates.filter(item => item.STATENAME === stateName);
     // uniq all cities
-    this.indianCities = [...new Set(queryData.map(item => item.DISTRICT))];
-
+    this.indianCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
+    
   }
 
   fetchPinCodeByCities(city: any) {
     this.areaCode = [];
     var allIndiaCities = AllIndiaPincodes['default'];
     //Filter Data by city names
-    var queryData = allIndiaCities.filter(item => item.DISTRICT === city);
+    var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city);
     //Filter uniq values by pincodes
-    var allPincodeData = [...new Set(queryData.map(item => item.PINCODE))];
+    var allPincodeData = [...new Set(queryData.map(item => item.PINCODE))].sort((a: any, b: any) => a.localeCompare(b));;
     for (let index = 0; index < allPincodeData.length; index++) {
       let pinObj = { pinCode: allPincodeData[index] };
       this.areaCode.push(pinObj);

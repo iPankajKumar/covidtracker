@@ -252,8 +252,8 @@
                                     >
                                 </p-dropdown>
                             </div> -->
-                                    <select class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
-                                        <option disabled>Select City</option>
+                                    <select [(ngModel)]="resetCityDropdown" class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
+                                        <option selected disabled [value]="-1">Select City</option>
                                         <option *ngFor="let city of indianCities | sort" [value]="city">{{city}}
                                         </option>
                                     </select>
@@ -280,7 +280,7 @@
                                     <label>Date</label>
                                     <p-calendar [(ngModel)]="dateValueSingle" [monthNavigator]="true"
                                         [yearNavigator]="true" dateFormat="dd-mm-yy" yearRange="2021:2099"
-                                        [touchUI]="true" [showIcon]="true" [readonlyInput]="true"></p-calendar>
+                                        [touchUI]="false" [showIcon]="true" [readonlyInput]="true"></p-calendar>
                                 </div>
                             </div>
                             <div class="col-xl-8">
