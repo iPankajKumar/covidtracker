@@ -12,7 +12,7 @@
                                             <i class="fas fa-stopwatch"></i>
                                             <span>{{display}}</span>
                                             <div class="clearfix"></div>
-                                        </div> 
+                                        </div>
                                     </div>
                                     <div class="col-xl-4">
                                         <div class="suggestions">
@@ -23,22 +23,25 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <div class="button-area">
-                                            <button type="button" class="btn-clear btn-primary common-btn ">Clear All</button>
-                                            <button type="button" class="btn-change btn-primary common-btn margin-left-5" (click)="searchSlotModal()">Change Preference</button>
+                                            <button type="button" class="btn-clear btn-primary common-btn ">Clear
+                                                All</button>
+                                            <button type="button"
+                                                class="btn-change btn-primary common-btn margin-left-5"
+                                                (click)="searchSlotModal()">Change Preference</button>
                                             <div class="clearfix"></div>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
-                            
+
                             <div class="clearfix"></div>
                             <div class="cart-container">
 
-                                <!-- <div class="cart-list" *ngIf="vaccinationSlotCurrentResponse && vaccinationSlotCurrentResponse?.centers">
+                                <!-- <div class="cart-list" *ngIf="vaccinationSlotAllResponse && vaccinationSlotAllResponse?.centers">
                                     <ul>
-                                        <li *ngFor="let center of vaccinationSlotCurrentResponse.centers; let i = index;">
+                                        <li *ngFor="let center of vaccinationSlotAllResponse.centers; let i = index;">
                                             <div class="cart-single">
                                                 <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
                                                 <div class="icon-syringe">
@@ -52,45 +55,49 @@
                                 </div>  -->
                                 <!-- bg-paid -->
 
-                            <div class="cart-list">
-                                <ul *ngIf="vaccinationSlotCurrentResponse.centers">
-                                    <li *ngFor="let centre of vaccinationSlotCurrentResponse?.centers" [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
-                                        <div *ngIf = "centre.isValidCentre" >
-                                        <div class="cart-single" [ngClass]="centre.fee_type=='Free'?'bg-free':'bg-paid'">
-                                            <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                            <div class="icon-syringe">
-                                                <i class="fas fa-syringe"></i>
-                                            </div>
-                                            <div class="cart-data">
-                                                <div class="center-name">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="far fa-hospital"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                {{centre.name}}
-                                                            </div>
-                                                            <div class="col-xl-4 custom-4 padding-lr-0">
-                                                               
+                                <div class="cart-list">
+                                    <ul *ngIf="vaccinationSlotAllResponse">
+                                        <li *ngFor="let centre of vaccinationSlotAllResponse"
+                                            [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
+                                            <div *ngIf="centre.isValidCentre">
+                                                <div class="cart-single"
+                                                    [ngClass]="centre.fee_type=='Free'?'bg-free':'bg-paid'">
+                                                    <button type="button" class="close-cart common-btn"><i
+                                                            class="fa fa-times"></i></button>
+                                                    <div class="icon-syringe">
+                                                        <i class="fas fa-syringe"></i>
+                                                    </div>
+                                                    <div class="cart-data">
+                                                        <div class="center-name">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-xl-1 padding-lr-0">
+                                                                        <i class="far fa-hospital"></i>
+                                                                    </div>
+                                                                    <div class="col-xl-11 padding-lr-0">
+                                                                        {{centre.name}}
+                                                                    </div>
+                                                                    <div class="col-xl-4 custom-4 padding-lr-0">
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="center-address">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-map-marker-alt"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                {{centre.address}}, {{centre.district_name}}, {{centre.pincode}}
+                                                        <div class="center-address">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-xl-1 padding-lr-0">
+                                                                        <i class="fas fa-map-marker-alt"></i>
+                                                                    </div>
+                                                                    <div class="col-xl-11 padding-lr-0">
+                                                                        {{centre.address}}, {{centre.district_name}},
+                                                                        {{centre.pincode}}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- <div class="vaccine-name">
+
+                                                        <!-- <div class="vaccine-name">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-xl-1 padding-lr-0">
@@ -102,19 +109,20 @@
                                                         </div>
                                                     </div>
                                                 </div>  -->
-                                                 <div class="max-capacity">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-users"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                {{centre.availableSlotsCount}} sessions available
+                                                        <div class="max-capacity">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-xl-1 padding-lr-0">
+                                                                        <i class="fas fa-users"></i>
+                                                                    </div>
+                                                                    <div class="col-xl-11 padding-lr-0">
+                                                                        {{centre.availableSlotsCount}} sessions
+                                                                        available
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div> 
-                                                <!-- <div class="container-fluid padding-lr-0">
+                                                        <!-- <div class="container-fluid padding-lr-0">
                                                     <div class="row">
                                                         <div class="col-xl-4 padding-right-0">
                                                             <div class="dateVaccine">
@@ -147,17 +155,17 @@
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div> -->
-                                                <div class="clearfix"></div>    
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                
-                                    </li>
-                                    
-                                </ul>
+
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="clearfix"></div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -168,156 +176,148 @@
 
 
 <div *ngIf="isModalShown" [config]="{ show: true }" bsModal #autoShownModal="bs-modal"
-     class="modal modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header gradient-bx">
-        <h4 id="dialog-auto-name" class="modal-title pull-left">Welcome</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Welcome
-        <p>
-            These are unsettling times and COVID-19 is clearing impacting our personal and professional lives, and those that we love.
-            Please take care, stay positive (covid -ve) and keep smiling. We will get through this, together.
-            Having said that, we welcome you to this volunteer initiative, please choose your desired pin-codes and date and we'll take it from there so that you can spend that extra time with your loved one's.
-        </p>
-      </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn-search-all common-btn" (click)="openModalSearch(searchModal);">Search Slots</button>
-      </div>
+    class="modal modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header gradient-bx">
+                <h4 id="dialog-auto-name" class="modal-title pull-left">Welcome</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Welcome
+                <p>
+                    These are unsettling times and COVID-19 is clearing impacting our personal and professional lives,
+                    and those that we love.
+                    Please take care, stay positive (covid -ve) and keep smiling. We will get through this, together.
+                    Having said that, we welcome you to this volunteer initiative, please choose your desired pin-codes
+                    and date and we'll take it from there so that you can spend that extra time with your loved one's.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn-search-all common-btn" (click)="openModalSearch(searchModal);">Search
+                    Slots</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div *ngIf="isSearchModalShown" [config]="{ show: true }" bsModal #searchModal="bs-modal"
-     class="modal modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+    class="modal modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
 
     <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header gradient-bx">
-          <h4 class="modal-title">Search By</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="hideModalSearch()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body search-modal-body">
-            <div class="container-fluid">
-                <div class="margin-bottom-40">
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div class="form-group">
-                            <label>State</label>
-                            <!-- <div>
-                                <p-dropdown 
-                                    [options]="indianStates" 
-                                    [(ngModel)]="selectedCity1" 
-                                    placeholder="Select a State" 
-                                    [filter]="true"
-                                    [showClear]="true"
-                                    (ngModelChange)="fetchCities($event.target.value)"
-                                    >
-                                </p-dropdown>
-                            </div> -->
-                            <select class="form-control" (change)="fetchCities($event.target.value)">
-                              <option disabled selected>Select State</option>
-                              <option *ngFor="let state of indianStates | sort" [value]="state">{{state}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="form-group">
-                            <label>City</label>
-                            <!-- <div>
-                                <p-dropdown 
-                                    [options]="indianStates" 
-                                    [(ngModel)]="selectedCity1" 
-                                    placeholder="Select a State" 
-                                    [filter]="true"
-                                    [showClear]="true"
-                                    (ngModelChange)="fetchCities($event.target.value)"
-                                    >
-                                </p-dropdown>
-                            </div> -->
-                            <select class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
-                              <option disabled>Select City</option>
-                              <option *ngFor="let city of indianCities | sort" [value]="city">{{city}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="form-group">
-                            <label>Pincode</label>
-                            <p-multiSelect 
-                            [options]="areaCode" 
-                            [(ngModel)]="selectedCodes" 
-                            defaultLabel="Select Pincode" 
-                            optionLabel="pinCode"
-                            maxSelectedLabels="2"
-                            >
-                            </p-multiSelect>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                </div>
-                <div>
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div class="form-group">
-                            <label>Date</label>
-                            <p-calendar [(ngModel)]="dateValueSingle" [monthNavigator]="true"
-                            [yearNavigator]="true"
-                            dateFormat="dd-mm-yy"
-                            yearRange="2021:2099" [touchUI]="true" 
-                            [showIcon]="true" [readonlyInput]="true"></p-calendar>
-                        </div>
-                    </div>
-                    <div class="col-xl-8">
-                        <div class="form-group">
-                            <label>Age Group</label>
-                            <div class="margin-top-8">
-                                <p-radioButton 
-                                    name="age" 
-                                    value="0" 
-                                    [(ngModel)]="ageCategory" 
-                                    inputId="ageCategory1"
-                                    >
-                                </p-radioButton>
-                                <span for="city1" class="margin-left-5 margin-right-60">18+</span>
+        <div class="modal-content">
 
-                                <p-radioButton 
-                                    name="age" 
-                                    value="1" 
-                                    [(ngModel)]="ageCategory" 
-                                    inputId="ageCategory2">
-                                </p-radioButton>
-                                <span for="city2" class="margin-left-5">45+</span>
+            <!-- Modal Header -->
+            <div class="modal-header gradient-bx">
+                <h4 class="modal-title">Search By</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModalSearch()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body search-modal-body">
+                <div class="container-fluid">
+                    <div class="margin-bottom-40">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <!-- <div>
+                                <p-dropdown 
+                                    [options]="indianStates" 
+                                    [(ngModel)]="selectedCity1" 
+                                    placeholder="Select a State" 
+                                    [filter]="true"
+                                    [showClear]="true"
+                                    (ngModelChange)="fetchCities($event.target.value)"
+                                    >
+                                </p-dropdown>
+                            </div> -->
+                                    <select class="form-control" (change)="fetchCities($event.target.value)">
+                                        <option disabled selected>Select State</option>
+                                        <option *ngFor="let state of indianStates | sort" [value]="state">{{state}}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <!-- <div>
+                                <p-dropdown 
+                                    [options]="indianStates" 
+                                    [(ngModel)]="selectedCity1" 
+                                    placeholder="Select a State" 
+                                    [filter]="true"
+                                    [showClear]="true"
+                                    (ngModelChange)="fetchCities($event.target.value)"
+                                    >
+                                </p-dropdown>
+                            </div> -->
+                                    <select class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
+                                        <option disabled>Select City</option>
+                                        <option *ngFor="let city of indianCities | sort" [value]="city">{{city}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <p-multiSelect [options]="areaCode" [(ngModel)]="selectedCodes"
+                                        defaultLabel="Select Pincode" optionLabel="pinCode" maxSelectedLabels="2">
+                                    </p-multiSelect>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <p-calendar [(ngModel)]="dateValueSingle" [monthNavigator]="true"
+                                        [yearNavigator]="true" dateFormat="dd-mm-yy" yearRange="2021:2099"
+                                        [touchUI]="true" [showIcon]="true" [readonlyInput]="true"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <div class="form-group">
+                                    <label>Age Group</label>
+                                    <div class="margin-top-8">
+                                        <p-radioButton name="age" value="0" [(ngModel)]="ageCategory"
+                                            inputId="ageCategory1">
+                                        </p-radioButton>
+                                        <span for="city1" class="margin-left-5 margin-right-60">18+</span>
+
+                                        <p-radioButton name="age" value="1" [(ngModel)]="ageCategory"
+                                            inputId="ageCategory2">
+                                        </p-radioButton>
+                                        <span for="city2" class="margin-left-5">45+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn-search-all common-btn"
+                    (click)="slotsByPincodeAndDate();hideModalSearch()">Search</button>
+            </div>
+
         </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn-search-all common-btn" (click)="slotsByPincodeAndDate();hideModalSearch()">Search</button>
-        </div>
-    
-      </div>
     </div>
 
 </div>

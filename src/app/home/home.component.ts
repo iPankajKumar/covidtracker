@@ -56,11 +56,15 @@ export class HomeComponent implements OnInit {
     this.searchModal.show();
   }
   ngOnInit() {
+    this.fetchStates();
+
+  }
+
+  fetchStates() {
     //Get unique states
     var indianState = [...new Set(AllIndiaPincodes['default'].map(item => item.STATENAME))];
     //Sort states alphabetically.
     this.indianStates = indianState.sort((a: any, b: any) => a.localeCompare(b));
-
   }
 
   fetchCities(stateName: string) {
@@ -90,28 +94,28 @@ export class HomeComponent implements OnInit {
     switch (type) {
       case 'success':
         this.toastr.success(title, message, {
-          timeOut: 10000,
+          timeOut: 9000,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'warning':
         this.toastr.warning(title, message, {
-          timeOut: 10000,
+          timeOut: 9000,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'info':
         this.toastr.info(title, message, {
-          timeOut: 10000,
+          timeOut: 9000,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'error':
         this.toastr.error(title, message, {
-          timeOut: 10000,
+          timeOut: 9000,
           positionClass: 'toast-top-center'
         });
         break;
@@ -125,31 +129,31 @@ export class HomeComponent implements OnInit {
 
   async slotsByPincodeAndDate() {
 
-
+    this.vaccinationSlotCurrentResponse = [];
     this.isSearchModalShown = false;
     console.log("Trial counter", this.trialCounter++);
     this.dateArrray = [];
     this.dateArrray.push(this.dateValueSingle);
-    this.showToasterMessage('', 'You have done your part, we will take it from here. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
+    this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
     for (let pIndex = 0; pIndex < this.selectedCodes.length; pIndex++) {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
         let url = this.vaccinationSlotUrlByPinCode + this.selectedCodes[pIndex]['pinCode'] + "&date=" + moment(this.dateArrray[dIndex]).format("DD-MM-YYYY");
 
-        await this.sleepNow(10000);
+        await this.sleepNow(3000);
         let subscription = this.httpClient.get(url).subscribe((data) => {
           this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
           this.validCenters();
           subscription.unsubscribe();
 
         }, (error) => {
-          this.showToasterMessage('', 'We encountered an error, but it is not your fault, please try again later.', 'error');
+          this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
         });
       }
     }
     let myThis = this;
     setInterval(function () {
       myThis.slotsByPincodeAndDate();
-    }, 3000000);
+    }, 60000);
   }
 
   validCenters() {
@@ -162,25 +166,70 @@ export class HomeComponent implements OnInit {
 
           if (this.ageCategory == 1) {
             if (this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].min_age_limit > 44 && this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].available_capacity > 0) {
+
               this.vaccinationSlotCurrentResponse.centers[centre].isValidCentre = true;
               this.vaccinationSlotCurrentResponse.centers[centre].availableSlotsCount++;
+
 
             }
           } else if (this.ageCategory == 0) {
             if (this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].min_age_limit > 17 && this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].available_capacity > 0) {
-              this.vaccinationSlotCurrentResponse.centers[centre].isValidCentre = true;
-              this.vaccinationSlotCurrentResponse.centers[centre].availableSlotsCount++;
 
+              this.vaccinationSlotCurrentResponse.centers[centre].isValidCentre = true; // custom flag to decide if the centre is valid for UI
+              this.vaccinationSlotCurrentResponse.centers[centre].availableSlotsCount++; // to show slots count
 
             }
           }
-
-
         }
+
+        //Add current centers to global centers to concat rest response
+        if (this.vaccinationSlotAllResponse.length > 0) {
+          let centreExists = this.checkIfCentreExists(this.vaccinationSlotCurrentResponse.centers[centre]);
+          if (centreExists) {
+
+            this.updateCentre(this.vaccinationSlotCurrentResponse.centers[centre]);
+
+          } else {
+            this.vaccinationSlotAllResponse.push(this.vaccinationSlotCurrentResponse.centers[centre]);
+          }
+
+        } else {
+          this.vaccinationSlotAllResponse.push(this.vaccinationSlotCurrentResponse.centers[centre]);
+        }
+
       }
     }
-    console.log("data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
+
+    if (!this.vaccinationSlotAllResponse.length) {
+      this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
+    }
+    console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
+    console.log("Valid data->>>>>>>>>>> ", this.vaccinationSlotAllResponse);
+    console.log("Pause");
   }
+
+
+  checkIfCentreExists(currentVacCentre: any): boolean {
+    let found = false;
+    this.vaccinationSlotAllResponse.forEach(function (item) {
+      if (item.center_id === currentVacCentre.center_id) {
+        found = true;
+      }
+    });
+    return found;
+  }
+
+  updateCentre(currentVacCentre: any) {
+
+    this.vaccinationSlotAllResponse.forEach(function (item) {
+      if (item.center_id === currentVacCentre.center_id) {
+        item.availableSlotsCount = currentVacCentre.availableSlotsCount;
+        item.isValidCentre = currentVacCentre.isValidCentre;
+      }
+    });
+
+  }
+
 
   display: any;
   timerCount(minute) {
