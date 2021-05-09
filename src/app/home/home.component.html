@@ -9,7 +9,7 @@
                                 <div class="container-fluid top-strip">
                                     <div class="row">
                                         <div class="col-xl-4">
-                                            <div class="timerCount" *ngIf="isValidCenter">
+                                            <div class="timerCount" *ngIf="noResultsFound && !firstTimeOnHomePage || isValidCenter">
                                                 <i class="fas fa-stopwatch"></i>
                                                 Refreshing in <span></span>
                                                 <countdown [config]="countdownConfig"></countdown>

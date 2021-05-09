@@ -152,28 +152,28 @@ export class HomeComponent implements OnInit {
     switch (type) {
       case 'success':
         this.toastr.success(title, message, {
-          timeOut: 9000,
+          timeOut: 7000,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'warning':
         this.toastr.warning(title, message, {
-          timeOut: 9000,
+          timeOut: 7000,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'info':
         this.toastr.info(title, message, {
-          timeOut: 9000,
+          timeOut: 7000,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'error':
         this.toastr.error(title, message, {
-          timeOut: 9000,
+          timeOut: 7000,
           positionClass: 'toast-top-center',
         });
         break;
@@ -205,7 +205,7 @@ export class HomeComponent implements OnInit {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
         let url = this.vaccinationSlotUrlByPinCode + this.selectedCodes[pIndex]['pinCode'] + "&date=" + moment(this.dateArrray[dIndex]).format("DD-MM-YYYY");
 
-        await this.sleepNow(3000);
+        await this.sleepNow(2000);
         let subscription = this.httpClient.get(url).subscribe((data) => {
           this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
           this.validCenters(this.selectedCodes[pIndex]['pinCode']);
@@ -213,13 +213,23 @@ export class HomeComponent implements OnInit {
 
         }, (error) => {
           this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
+          return;
         });
       }
     }
-    let myThis = this;
-    setInterval(function () {
-      myThis.slotsByPincodeAndDate();
-    }, 360000);
+
+   this.sleepThread();
+
+  }
+
+  sleepThread(){
+   
+      let myThis = this;
+      setInterval(function () {
+        myThis.slotsByPincodeAndDate();
+      }, 360000);
+      console.log("Sleeping for 6 min");
+  
   }
 
   validCenters(currentPincode:any) {
