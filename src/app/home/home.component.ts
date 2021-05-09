@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   selectedCity:any;
   firstTimeOnHomePage:boolean= true;
   noResultsFound: boolean =false;
+  showSpinner: boolean =false;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;
@@ -178,12 +179,18 @@ export class HomeComponent implements OnInit {
   async slotsByPincodeAndDate() {
 
     this.firstTimeOnHomePage =  false;
+    this.noResultsFound =  false;
     this.vaccinationSlotCurrentResponse = [];
     this.searchModal.hide();
     console.log("Trial counter", this.trialCounter++);
     this.dateArrray = [];
     this.dateArrray.push(this.dateValueSingle);
-    this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
+
+    if(this.selectedCodes.length>0){
+      this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
+      this.showSpinner = true;
+    }
+    
     for (let pIndex = 0; pIndex < this.selectedCodes.length; pIndex++) {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
         let url = this.vaccinationSlotUrlByPinCode + this.selectedCodes[pIndex]['pinCode'] + "&date=" + moment(this.dateArrray[dIndex]).format("DD-MM-YYYY");
@@ -253,8 +260,10 @@ export class HomeComponent implements OnInit {
     if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
       this.showToasterMessage('', 'We could not find any slots for ' + currentPincode + ' , we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
       this.noResultsFound = true;
+      this.showSpinner = false;
     }else{
       this.noResultsFound =  false;
+      this.showSpinner = false;
       this.timerCount(6);
     }
     // console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);

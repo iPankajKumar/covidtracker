@@ -44,6 +44,10 @@
                                         </div>
                                         <span>Hang in there! No results found this time, but we'll keep looking, or you can quickly change your preference.</span>
                                     </div>
+
+                                    <div class="bydefault-image" *ngIf="showSpinner">
+                                        <img src="../../assets/images/spinner.svg"/>
+                                    </div>
                                    
                                     <div class="cart-list" *ngIf="isValidCenter">
                                         <ul *ngIf="vaccinationSlotAllResponse">
