@@ -63,8 +63,8 @@
 }
 
 .timerCount{
-    font-size: 18px;
-    width: 230px;
+    font-size: 16px;
+    width: 220px;
     padding: 5px 10px;
     text-align: center;
     background: #35b4ff;
@@ -77,10 +77,13 @@
 }
 .timerCount i{
     float:left;
-    margin-right: 10px;
+    margin-right: 5px;
     font-size: 18px; 
     position: relative;
     top: 3px;
+}
+.timerCount span{
+    font-family: 'montserratbold';
 }
 
 .suggestions{
@@ -116,9 +119,18 @@
     margin-bottom: 30px;
 }
 
-
+body .ui-multiselect .ui-multiselect-label {
+    font-size: 14px;
+    color: #333333;
+    padding: 0;
+}
+body .ui-dropdown.ui-dropdown-clearable .ui-dropdown-label{
+    font-weight: normal;
+    padding: 0;
+}
 
 body .ui-multiselect,
+body .ui-dropdown,
 body .ui-calendar.ui-calendar-w-btn .ui-inputtext {
     display: block;
     width: 100%;

@@ -11,7 +11,7 @@
                                         <div class="col-xl-4">
                                             <div class="timerCount" *ngIf="isValidCenter">
                                                 <i class="fas fa-stopwatch"></i>
-                                                <span>Refreshing in {{display}}</span>
+                                                Refreshing in <span>{{display}}</span>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
@@ -35,7 +35,15 @@
 
                                 <div class="clearfix"></div>
                                 <div class="cart-container">
-
+                                    <div class="bydefault-image">
+                                        <img src="../../assets/images/homepageMessage.png"/>
+                                    </div>
+                                    <div class="no-result" style="display: none;">
+                                        <div class="no-res-image">
+                                            <img src="../../assets/images/no-result.svg"/>
+                                        </div>
+                                        <span>No Result Found</span>
+                                    </div>
                                     <!-- <div class="cart-list" *ngIf="vaccinationSlotAllResponse && vaccinationSlotAllResponse?.centers">
                                         <ul>
                                             <li *ngFor="let center of vaccinationSlotAllResponse.centers; let i = index;">
@@ -184,7 +192,7 @@
 
 
 <div [config]="{ show: true }" bsModal #autoShownModal="bs-modal" class="modal modal-common modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header gradient-bx">
                 <h4 id="dialog-auto-name" class="modal-title pull-left">Welcome</h4>
@@ -212,7 +220,7 @@
 </div>
 
 <div bsModal #searchModal="bs-modal" class="modal modal-common modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
 
             <!-- Modal Header -->
@@ -329,7 +337,7 @@
 </div>
 
 <div bsModal #openSingleTileModal="bs-modal" class="modal modal-common modal-singleDetails fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header gradient-bx">
