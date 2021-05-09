@@ -35,32 +35,17 @@
 
                                 <div class="clearfix"></div>
                                 <div class="cart-container">
-                                    <div class="bydefault-image">
+                                    <div class="bydefault-image" *ngIf="firstTimeOnHomePage">
                                         <img src="../../assets/images/homepageMessage.png"/>
                                     </div>
-                                    <div class="no-result" style="display: none;">
+                                    <div class="no-result" *ngIf="noResultsFound && !firstTimeOnHomePage">
                                         <div class="no-res-image">
                                             <img src="../../assets/images/no-result.svg"/>
                                         </div>
-                                        <span>No Result Found</span>
+                                        <span>Hang in there! No results found this time, but we'll keep looking, or you can quickly change your preference.</span>
                                     </div>
-                                    <!-- <div class="cart-list" *ngIf="vaccinationSlotAllResponse && vaccinationSlotAllResponse?.centers">
-                                        <ul>
-                                            <li *ngFor="let center of vaccinationSlotAllResponse.centers; let i = index;">
-                                                <div class="cart-single">
-                                                    <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                                    <div class="icon-syringe">
-                                                        <i class="fas fa-syringe"></i>
-                                                    </div>
-                                                    Slot fount at {{center.address}} {{center.block_name}}, District  {{center.district_name}} is free {{center.fee_type}}
-                                                    from time {{center.from}}
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>  -->
-                                    <!-- bg-paid -->
-
-                                    <div class="cart-list">
+                                   
+                                    <div class="cart-list" *ngIf="isValidCenter">
                                         <ul *ngIf="vaccinationSlotAllResponse">
                                             <li (click)="opensingleTileModal(centre)" *ngFor="let centre of vaccinationSlotAllResponse"
                                                 [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
@@ -102,18 +87,6 @@
                                                                 </div>
                                                             </div>
 
-                                                            <!-- <div class="vaccine-name">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-xl-1 padding-lr-0">
-                                                                    <i class="fas fa-syringe"></i>
-                                                                </div>
-                                                                <div class="col-xl-11 padding-lr-0">
-                                                                    {{centre.fee_type}}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>  -->
                                                             <div class="max-capacity">
                                                                 <div class="container-fluid">
                                                                     <div class="row">
@@ -127,39 +100,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="container-fluid padding-lr-0">
-                                                        <div class="row">
-                                                            <div class="col-xl-4 padding-right-0">
-                                                                <div class="dateVaccine">
-                                                                    <div class="container-fluid">
-                                                                        <div class="row">
-                                                                            <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                                <i class="far fa-calendar"></i>
-                                                                            </div>
-                                                                            <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                                07-05-2021
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-8">
-                                                                <div class="time">
-                                                                    <div class="container-fluid">
-                                                                        <div class="row">
-                                                                            <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                                <i class="far fa-clock"></i>
-                                                                            </div>
-                                                                            <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                                09:00 AM <span>To</span> 17:00
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                    </div> -->
+                                                           
                                                             <div class="clearfix"></div>
                                                         </div>
                                                     </div>
@@ -175,18 +116,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="fixed-covid">
-            <ul class="bubbles">
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-                <li><img src="../../assets/images/covid-icon.png"/></li>
-            </ul>
-        </div> -->
+       
     </div>
 </div>
 
@@ -251,11 +181,7 @@
                                             >
                                         </p-dropdown>
                                     </div>
-                                    <!-- <select class="form-control" (change)="fetchCities($event.target.value)">
-                                        <option disabled selected>Select State</option>
-                                        <option *ngFor="let state of indianStates | sort" [value]="state">{{state}}
-                                        </option>
-                                    </select> -->
+                                  
                                 </div>
                             </div>
                             <div class="col-xl-4">
@@ -273,11 +199,7 @@
                                             >
                                         </p-dropdown>
                                     </div>
-                                    <!-- <select [(ngModel)]="resetCityDropdown" class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
-                                        <option selected disabled [value]="-1">Select City</option>
-                                        <option *ngFor="let city of indianCities | sort" [value]="city">{{city}}
-                                        </option>
-                                    </select> -->
+                                 
                                 </div>
                             </div>
                             <div class="col-xl-4">

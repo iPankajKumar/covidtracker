@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
   selectedCentre:any;
   selectedState:any;
   selectedCity:any;
+  firstTimeOnHomePage:boolean= true;
+  noResultsFound: boolean =false;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;
@@ -56,6 +58,7 @@ export class HomeComponent implements OnInit {
   clearAll(){
     this.vaccinationSlotAllResponse = [];
     this.isValidCenter = this.isCenterValid();
+    this.firstTimeOnHomePage =  true;
   }
   hideModal() {
     this.autoShownModal.hide();
@@ -174,6 +177,7 @@ export class HomeComponent implements OnInit {
 
   async slotsByPincodeAndDate() {
 
+    this.firstTimeOnHomePage =  false;
     this.vaccinationSlotCurrentResponse = [];
     this.searchModal.hide();
     console.log("Trial counter", this.trialCounter++);
@@ -248,7 +252,9 @@ export class HomeComponent implements OnInit {
     this.isValidCenter = this.isCenterValid();
     if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
       this.showToasterMessage('', 'We could not find any slots for ' + currentPincode + ' , we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
+      this.noResultsFound = true;
     }else{
+      this.noResultsFound =  false;
       this.timerCount(6);
     }
     // console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
