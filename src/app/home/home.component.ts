@@ -281,6 +281,7 @@ export class HomeComponent implements OnInit {
       this.showToasterMessage('', 'We could not find any slots for ' + currentPincode + ' , we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
       this.noResultsFound = true;
       this.showSpinner = false;
+      this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: false};
     }else{
       this.noResultsFound =  false;
       this.showSpinner = false;
