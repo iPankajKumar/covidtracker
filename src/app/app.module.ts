@@ -12,7 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { Pipe, PipeTransform } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { CountdownModule } from 'ngx-countdown';
 import {TableModule} from 'primeng/table';
 import { SingleTileComponent } from './single-tile/single-tile.component';
 import {DropdownModule} from 'primeng/dropdown';
@@ -55,7 +55,8 @@ export class ArraySortPipe {
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
     TableModule,
-    DropdownModule
+    DropdownModule,
+    CountdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

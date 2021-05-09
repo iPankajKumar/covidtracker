@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
 import * as AllIndiaPincodes from '../../assets/json/AllIndiaPincodes.json';
 import { HttpClient } from "@angular/common/http";
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { CountdownComponent } from 'ngx-countdown';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,8 +26,9 @@ export class HomeComponent implements OnInit {
   isValidCenter:boolean = false;
   constructor(private httpClient: HttpClient, private modalService: BsModalService, 
     private toastr: ToastrService, private router : Router) {
-    //this.timerCount(5);
+    
   }
+  
   dateValueSingle: Date;
   dateValueFrom: Date;
   dateValueTo: Date;
@@ -45,14 +47,21 @@ export class HomeComponent implements OnInit {
   firstTimeOnHomePage:boolean= true;
   noResultsFound: boolean =false;
   showSpinner: boolean =false;
+ countdownConfig : any;
+ countdownTimer:number= 360;
+
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;
+  @ViewChild('countdown', { static: false }) countdown: CountdownComponent;
 
   ngOnInit() {
     this.fetchStates();
+    this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: true};
+    this.dateValueSingle = new Date(moment().valueOf());
     
   }
+  
   clearResponse(){
     this.vaccinationSlotAllResponse = [];
   }
@@ -178,6 +187,7 @@ export class HomeComponent implements OnInit {
 
   async slotsByPincodeAndDate() {
 
+    this.isValidCenter = false;
     this.firstTimeOnHomePage =  false;
     this.noResultsFound =  false;
     this.vaccinationSlotCurrentResponse = [];
@@ -264,7 +274,8 @@ export class HomeComponent implements OnInit {
     }else{
       this.noResultsFound =  false;
       this.showSpinner = false;
-      this.timerCount(6);
+      this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: false};
+      
     }
     // console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
     // console.log("Valid data->>>>>>>>>>> ", this.vaccinationSlotAllResponse);
@@ -307,30 +318,10 @@ export class HomeComponent implements OnInit {
     return found;
   }
 
-  display: any;
-  timerCount(minute) {
-    // let minute = 1;
-    let seconds: number = minute * 60;
-    let textSec: any = "0";
-    let statSec: number = 60;
+  
+  
 
-    const prefix = minute < 10 ? "0" : "";
-
-    const timer = setInterval(() => {
-      seconds--;
-      if (statSec != 0) statSec--;
-      else statSec = 59;
-
-      if (statSec < 10) {
-        textSec = "0" + statSec;
-      } else textSec = statSec;
-
-      this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
-
-      if (seconds == 0) {
-        console.log("finished");
-        clearInterval(timer);
-      }
-    }, 1000);
-  }
+    
 }
+
+

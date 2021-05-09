@@ -25,6 +25,7 @@
     "moment": "^2.29.1",
     "ng2-daterangepicker": "^3.0.1",
     "ngx-bootstrap": "^5.6.2",
+    "ngx-countdown": "^8.0.4",
     "ngx-toastr": "^10.0.4",
     "primeicons": "^4.1.0",
     "primeng": "^8.1.1",

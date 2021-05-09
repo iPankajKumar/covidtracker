@@ -11,7 +11,8 @@
                                         <div class="col-xl-4">
                                             <div class="timerCount" *ngIf="isValidCenter">
                                                 <i class="fas fa-stopwatch"></i>
-                                                Refreshing in <span>{{display}}</span>
+                                                Refreshing in <span></span>
+                                                <countdown [config]="countdownConfig"></countdown>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
@@ -181,7 +182,8 @@
                                             optionLabel="code"
                                             [filter]="true"
                                             [showClear]="true"
-                                            (ngModelChange)="fetchCities(selectedState.code)"
+                                            (ngModelChange)="fetchCities(selectedState?.code)"
+                                            resetFilterOnHide=true
                                             >
                                         </p-dropdown>
                                     </div>
@@ -199,7 +201,8 @@
                                             optionLabel="code"
                                             [filter]="true"
                                             [showClear]="true"
-                                            (ngModelChange)="fetchPinCodeByCities(selectedCity.code)"
+                                            (ngModelChange)="fetchPinCodeByCities(selectedCity?.code)"
+                                            resetFilterOnHide=true
                                             >
                                         </p-dropdown>
                                     </div>
@@ -210,7 +213,7 @@
                                 <div class="form-group">
                                     <label>Pincode</label>
                                     <p-multiSelect [options]="areaCode" [(ngModel)]="selectedCodes"
-                                        defaultLabel="Select Pincode" optionLabel="pinCode" maxSelectedLabels="2">
+                                        defaultLabel="Select Pincode" optionLabel="pinCode" maxSelectedLabels="2" resetFilterOnHide=true>
                                     </p-multiSelect>
                                 </div>
                             </div>
