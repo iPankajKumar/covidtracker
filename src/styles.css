@@ -324,7 +324,7 @@ header .navbar.bg-light {
 }
 
 .modal-singleDetails .modal-body{
-    height: calc(100vh - 110px);
+    height: auto;
     overflow-y: scroll;
 }
 .gradient-bx{

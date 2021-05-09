@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   isValidCenter:boolean = false;
   constructor(private httpClient: HttpClient, private modalService: BsModalService, 
     private toastr: ToastrService, private router : Router) {
-    this.timerCount(5);
+    //this.timerCount(5);
   }
   dateValueSingle: Date;
   dateValueFrom: Date;
@@ -40,7 +40,8 @@ export class HomeComponent implements OnInit {
   ageCategory: number = 0;
   resetCityDropdown: number = -1;
   selectedCentre:any;
-
+  selectedState:any;
+  selectedCity:any;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;
@@ -49,7 +50,9 @@ export class HomeComponent implements OnInit {
     this.fetchStates();
     
   }
-
+  clearResponse(){
+    this.vaccinationSlotAllResponse = [];
+  }
   clearAll(){
     this.vaccinationSlotAllResponse = [];
     this.isValidCenter = this.isCenterValid();
@@ -67,7 +70,9 @@ export class HomeComponent implements OnInit {
   searchSlotModal() {
     this.searchModal.show();
   }
-
+  hideAvailableSessionModal(){
+    this.openSingleTileModal.hide();
+  }
   navigateToSessions(sessionObject) {
     this.router.navigate(['singleTile'], { state: { sessionData: sessionObject } });
   }
@@ -84,23 +89,41 @@ export class HomeComponent implements OnInit {
     this.indianStates = [];
     var indianState = [...new Set(AllIndiaPincodes['default'].map(item => item.STATENAME))];
     //Sort states alphabetically.
-    this.indianStates = indianState.sort((a: any, b: any) => a.localeCompare(b));
+    for (let stateIndex = 0; stateIndex < indianState.length; stateIndex++) {
+      let state = {
+        name : indianState[stateIndex],
+        code : indianState[stateIndex]
+      }
+      this.indianStates.push(state);
+    }
+    this.indianStates = this.indianStates.sort((a: any, b: any) => a.code.localeCompare(b.code));
+    //console.log("states", this.indianStates);
   }
 
   fetchCities(stateName: string) {
     this.indianCities = [];
     this.areaCode = [];
+    this.selectedCodes= [];
     this.resetCityDropdown = -1;
     var allIndiaStates = AllIndiaPincodes['default'];
     //get all cities 
     var queryData = allIndiaStates.filter(item => item.STATENAME === stateName);
     // uniq all cities
-    this.indianCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
-    
+    var allCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
+    //console.log("allCities", allCities);
+    allCities.forEach((element:any) => {
+      let city = {
+        name : element,
+        code : element
+      }
+      this.indianCities.push(city);
+    });
+    //console.log("indianCities", this.indianCities);
   }
 
   fetchPinCodeByCities(city: any) {
     this.areaCode = [];
+    this.selectedCodes= [];
     var allIndiaCities = AllIndiaPincodes['default'];
     //Filter Data by city names
     var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city);
@@ -164,7 +187,7 @@ export class HomeComponent implements OnInit {
         await this.sleepNow(3000);
         let subscription = this.httpClient.get(url).subscribe((data) => {
           this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
-          this.validCenters();
+          this.validCenters(this.selectedCodes[pIndex]['pinCode']);
           subscription.unsubscribe();
 
         }, (error) => {
@@ -178,7 +201,7 @@ export class HomeComponent implements OnInit {
     }, 360000);
   }
 
-  validCenters() {
+  validCenters(currentPincode:any) {
 
     if (this.vaccinationSlotCurrentResponse && this.vaccinationSlotCurrentResponse.centers.length > 0) {
       for (let centre in this.vaccinationSlotCurrentResponse.centers) {
@@ -224,11 +247,13 @@ export class HomeComponent implements OnInit {
     }
     this.isValidCenter = this.isCenterValid();
     if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
-      this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
+      this.showToasterMessage('', 'We could not find any slots for ' + currentPincode + ' , we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
+    }else{
+      this.timerCount(6);
     }
-    console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
-    console.log("Valid data->>>>>>>>>>> ", this.vaccinationSlotAllResponse);
-    console.log("Pause");
+    // console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
+    // console.log("Valid data->>>>>>>>>>> ", this.vaccinationSlotAllResponse);
+    // console.log("Pause");
   }
 
 

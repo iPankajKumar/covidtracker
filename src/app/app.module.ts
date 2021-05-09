@@ -15,6 +15,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import {TableModule} from 'primeng/table';
 import { SingleTileComponent } from './single-tile/single-tile.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @Pipe({
   name: "sort"
@@ -53,7 +54,8 @@ export class ArraySortPipe {
     RadioButtonModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
-    TableModule
+    TableModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

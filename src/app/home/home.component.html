@@ -11,7 +11,7 @@
                                         <div class="col-xl-4">
                                             <div class="timerCount" *ngIf="isValidCenter">
                                                 <i class="fas fa-stopwatch"></i>
-                                                <span>{{display}}</span>
+                                                <span>Refreshing in {{display}}</span>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
@@ -25,7 +25,7 @@
                                         <div class="col-xl-4">
                                             <div class="button-area">
                                                 <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Preference</button>
-                                                <button type="button" (click)="clearAll()" [disabled]="vaccinationSlotAllResponse.length == 0" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
+                                                <button type="button" (click)="clearAll()" [disabled]="!isValidCenter" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                                                                         </div>
                                                                         <div class="col-xl-11 padding-lr-0">
                                                                             {{centre.availableSlotsCount}} sessions
-                                                                            available <span class="btn-view-more" [routerLink]="['/singleTile']"><i class="far fa-eye"></i> View slots</span>
+                                                                            available <span class="btn-view-more"><i class="far fa-eye"></i> View slots</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -167,7 +167,7 @@
                 </div>
             </div>
         </div>
-        <div class="fixed-covid">
+        <!-- <div class="fixed-covid">
             <ul class="bubbles">
                 <li><img src="../../assets/images/covid-icon.png"/></li>
                 <li><img src="../../assets/images/covid-icon.png"/></li>
@@ -178,7 +178,7 @@
                 <li><img src="../../assets/images/covid-icon.png"/></li>
                 <li><img src="../../assets/images/covid-icon.png"/></li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -231,43 +231,45 @@
                             <div class="col-xl-4">
                                 <div class="form-group">
                                     <label>State</label>
-                                    <!-- <div>
+                                    <div>
                                         <p-dropdown 
                                             [options]="indianStates" 
-                                            [(ngModel)]="selectedCity1" 
-                                            placeholder="Select a State" 
+                                            [(ngModel)]="selectedState" 
+                                            placeholder="Select a State"
+                                            optionLabel="code"
                                             [filter]="true"
                                             [showClear]="true"
-                                            (ngModelChange)="fetchCities($event.target.value)"
+                                            (ngModelChange)="fetchCities(selectedState.code)"
                                             >
                                         </p-dropdown>
-                                    </div> -->
-                                    <select class="form-control" (change)="fetchCities($event.target.value)">
+                                    </div>
+                                    <!-- <select class="form-control" (change)="fetchCities($event.target.value)">
                                         <option disabled selected>Select State</option>
                                         <option *ngFor="let state of indianStates | sort" [value]="state">{{state}}
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-xl-4">
                                 <div class="form-group">
                                     <label>City</label>
-                                    <!-- <div>
-                                <p-dropdown 
-                                    [options]="indianStates" 
-                                    [(ngModel)]="selectedCity1" 
-                                    placeholder="Select a State" 
-                                    [filter]="true"
-                                    [showClear]="true"
-                                    (ngModelChange)="fetchCities($event.target.value)"
-                                    >
-                                </p-dropdown>
-                            </div> -->
-                                    <select [(ngModel)]="resetCityDropdown" class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
+                                    <div>
+                                        <p-dropdown 
+                                            [options]="indianCities" 
+                                            [(ngModel)]="selectedCity" 
+                                            placeholder="Select a City" 
+                                            optionLabel="code"
+                                            [filter]="true"
+                                            [showClear]="true"
+                                            (ngModelChange)="fetchPinCodeByCities(selectedCity.code)"
+                                            >
+                                        </p-dropdown>
+                                    </div>
+                                    <!-- <select [(ngModel)]="resetCityDropdown" class="form-control" (change)="fetchPinCodeByCities($event.target.value)">
                                         <option selected disabled [value]="-1">Select City</option>
                                         <option *ngFor="let city of indianCities | sort" [value]="city">{{city}}
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-xl-4">
@@ -319,7 +321,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn-search-all btn-primary common-btn"
-                    (click)="slotsByPincodeAndDate();hideModalSearch()">Search</button>
+                    (click)="slotsByPincodeAndDate();hideModalSearch();clearResponse()">Search</button>
             </div>
 
         </div>
@@ -332,7 +334,7 @@
             <!-- Modal Header -->
             <div class="modal-header gradient-bx">
                 <h4 class="modal-title">Available Sessions</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModalSearch()">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideAvailableSessionModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -352,7 +354,7 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-session>
-                                    <tr>
+                                    <tr *ngIf="session.available_capacity != 0">
                                         <td>{{session.vaccine}}</td>
                                         <td>{{session.available_capacity}}</td>
                                         <td>{{session.min_age_limit}}</td>
