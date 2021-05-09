@@ -1,178 +1,189 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-12">
-            <div>
-                <div class="container-fluid padding-lr-0">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="container-fluid top-strip">
-                                <div class="row">
-                                    <div class="col-xl-4">
-                                        <div class="timerCount" *ngIf="isValidCenter">
-                                            <i class="fas fa-stopwatch"></i>
-                                            <span>{{display}}</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="suggestions" *ngIf="isValidCenter">
-                                            <div class="notes"><span class="free"></span> Free</div>
-                                            <div class="notes"><span class="paid"></span> Paid</div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="button-area">
-                                            <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Preference</button>
-                                            <button type="button" (click)="clearAll()" [disabled]="vaccinationSlotAllResponse.length == 0" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
-                                            <div class="clearfix"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-                            <div class="cart-container">
-
-                                <!-- <div class="cart-list" *ngIf="vaccinationSlotAllResponse && vaccinationSlotAllResponse?.centers">
-                                    <ul>
-                                        <li *ngFor="let center of vaccinationSlotAllResponse.centers; let i = index;">
-                                            <div class="cart-single">
-                                                <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
-                                                <div class="icon-syringe">
-                                                    <i class="fas fa-syringe"></i>
-                                                </div>
-                                                Slot fount at {{center.address}} {{center.block_name}}, District  {{center.district_name}} is free {{center.fee_type}}
-                                                from time {{center.from}}
+    <div class="position-relative">
+        <div class="row">
+            <div class="col-xl-12">
+                <div>
+                    <div class="container-fluid padding-lr-0">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="container-fluid top-strip">
+                                    <div class="row">
+                                        <div class="col-xl-4">
+                                            <div class="timerCount" *ngIf="isValidCenter">
+                                                <i class="fas fa-stopwatch"></i>
+                                                <span>{{display}}</span>
+                                                <div class="clearfix"></div>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>  -->
-                                <!-- bg-paid -->
+                                        </div>
+                                        <div class="col-xl-4">
+                                            <div class="suggestions" *ngIf="isValidCenter">
+                                                <div class="notes"><span class="free"></span> Free</div>
+                                                <div class="notes"><span class="paid"></span> Paid</div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4">
+                                            <div class="button-area">
+                                                <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Preference</button>
+                                                <button type="button" (click)="clearAll()" [disabled]="vaccinationSlotAllResponse.length == 0" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
 
-                                <div class="cart-list">
-                                    <ul *ngIf="vaccinationSlotAllResponse">
-                                        <li (click)="navigateToSessions(centre)" *ngFor="let centre of vaccinationSlotAllResponse"
-                                            [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
-                                            <div *ngIf="centre.isValidCentre">
-                                                <div class="cart-single"
-                                                    [ngClass]="centre.fee_type=='Free'?'bg-free':'bg-paid'">
-                                                    <button type="button" class="close-cart common-btn"><i
-                                                            class="fa fa-times"></i></button>
+                                <div class="clearfix"></div>
+                                <div class="cart-container">
+
+                                    <!-- <div class="cart-list" *ngIf="vaccinationSlotAllResponse && vaccinationSlotAllResponse?.centers">
+                                        <ul>
+                                            <li *ngFor="let center of vaccinationSlotAllResponse.centers; let i = index;">
+                                                <div class="cart-single">
+                                                    <button type="button" class="close-cart common-btn"><i class="fa fa-times"></i></button>
                                                     <div class="icon-syringe">
                                                         <i class="fas fa-syringe"></i>
                                                     </div>
-                                                    <div class="cart-data">
-                                                        <div class="center-name">
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-xl-1 padding-lr-0">
-                                                                        <i class="far fa-hospital"></i>
-                                                                    </div>
-                                                                    <div class="col-xl-11 padding-lr-0">
-                                                                        {{centre.name}}
-                                                                    </div>
-                                                                    <div class="col-xl-4 custom-4 padding-lr-0">
+                                                    Slot fount at {{center.address}} {{center.block_name}}, District  {{center.district_name}} is free {{center.fee_type}}
+                                                    from time {{center.from}}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>  -->
+                                    <!-- bg-paid -->
 
+                                    <div class="cart-list">
+                                        <ul *ngIf="vaccinationSlotAllResponse">
+                                            <li (click)="opensingleTileModal(centre)" *ngFor="let centre of vaccinationSlotAllResponse"
+                                                [ngStyle]="{'display':centre.isValidCentre ? '' : 'none' }">
+                                                <div *ngIf="centre.isValidCentre">
+                                                    <div class="cart-single"
+                                                        [ngClass]="centre.fee_type=='Free'?'bg-free':'bg-paid'">
+                                                        <button type="button" class="close-cart common-btn"><i
+                                                                class="fa fa-times"></i></button>
+                                                        <div class="icon-syringe">
+                                                            <i class="fas fa-syringe"></i>
+                                                        </div>
+                                                        <div class="cart-data">
+                                                            <div class="center-name">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-1 padding-lr-0">
+                                                                            <i class="far fa-hospital"></i>
+                                                                        </div>
+                                                                        <div class="col-xl-11 padding-lr-0">
+                                                                            {{centre.name}}
+                                                                        </div>
+                                                                        <div class="col-xl-4 custom-4 padding-lr-0">
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="center-address">
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-xl-1 padding-lr-0">
-                                                                        <i class="fas fa-map-marker-alt"></i>
-                                                                    </div>
-                                                                    <div class="col-xl-11 padding-lr-0">
-                                                                        {{centre.address}}, {{centre.district_name}},
-                                                                        {{centre.pincode}}
+                                                            <div class="center-address">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-1 padding-lr-0">
+                                                                            <i class="fas fa-map-marker-alt"></i>
+                                                                        </div>
+                                                                        <div class="col-xl-11 padding-lr-0">
+                                                                            {{centre.address}}, {{centre.district_name}},
+                                                                            {{centre.pincode}}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                        <!-- <div class="vaccine-name">
-                                                    <div class="container-fluid">
+                                                            <!-- <div class="vaccine-name">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-xl-1 padding-lr-0">
+                                                                    <i class="fas fa-syringe"></i>
+                                                                </div>
+                                                                <div class="col-xl-11 padding-lr-0">
+                                                                    {{centre.fee_type}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  -->
+                                                            <div class="max-capacity">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-1 padding-lr-0">
+                                                                            <i class="fas fa-users"></i>
+                                                                        </div>
+                                                                        <div class="col-xl-11 padding-lr-0">
+                                                                            {{centre.availableSlotsCount}} sessions
+                                                                            available <span class="btn-view-more" [routerLink]="['/singleTile']"><i class="far fa-eye"></i> View slots</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="container-fluid padding-lr-0">
                                                         <div class="row">
-                                                            <div class="col-xl-1 padding-lr-0">
-                                                                <i class="fas fa-syringe"></i>
-                                                            </div>
-                                                            <div class="col-xl-11 padding-lr-0">
-                                                                {{centre.fee_type}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>  -->
-                                                        <div class="max-capacity">
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-xl-1 padding-lr-0">
-                                                                        <i class="fas fa-users"></i>
-                                                                    </div>
-                                                                    <div class="col-xl-11 padding-lr-0">
-                                                                        {{centre.availableSlotsCount}} sessions
-                                                                        available <span class="btn-view-more" [routerLink]="['/singleTile']"><i class="far fa-eye"></i> View slots</span>
+                                                            <div class="col-xl-4 padding-right-0">
+                                                                <div class="dateVaccine">
+                                                                    <div class="container-fluid">
+                                                                        <div class="row">
+                                                                            <div class="col-xl-1 col-cust-1 padding-lr-0">
+                                                                                <i class="far fa-calendar"></i>
+                                                                            </div>
+                                                                            <div class="col-xl-11 col-cust-11 padding-lr-0">
+                                                                                07-05-2021
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- <div class="container-fluid padding-lr-0">
-                                                    <div class="row">
-                                                        <div class="col-xl-4 padding-right-0">
-                                                            <div class="dateVaccine">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-calendar"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            07-05-2021
+                                                            <div class="col-xl-8">
+                                                                <div class="time">
+                                                                    <div class="container-fluid">
+                                                                        <div class="row">
+                                                                            <div class="col-xl-1 col-cust-1 padding-lr-0">
+                                                                                <i class="far fa-clock"></i>
+                                                                            </div>
+                                                                            <div class="col-xl-11 col-cust-11 padding-lr-0">
+                                                                                09:00 AM <span>To</span> 17:00
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-8">
-                                                            <div class="time">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-xl-1 col-cust-1 padding-lr-0">
-                                                                            <i class="far fa-clock"></i>
-                                                                        </div>
-                                                                        <div class="col-xl-11 col-cust-11 padding-lr-0">
-                                                                            09:00 AM <span>To</span> 17:00
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div> -->
                                                         <div class="clearfix"></div>
+                                                    </div> -->
+                                                            <div class="clearfix"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                        </li>
-
-                                    </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="fixed-covid">
+            <ul class="bubbles">
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+                <li><img src="../../assets/images/covid-icon.png"/></li>
+            </ul>
+        </div>
     </div>
 </div>
 
 
-<div [config]="{ show: true }" bsModal #autoShownModal="bs-modal" class="modal modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+<div [config]="{ show: true }" bsModal #autoShownModal="bs-modal" class="modal modal-common modal-search modal-welcome fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header gradient-bx">
@@ -182,7 +193,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Welcome
+                <h3>Welcome To Covid Tracker</h3>
                 <p>
                     These are unsettling times and COVID-19 is clearing impacting our personal and professional lives,
                     and those that we love.
@@ -200,7 +211,7 @@
     </div>
 </div>
 
-<div bsModal #searchModal="bs-modal" class="modal modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+<div bsModal #searchModal="bs-modal" class="modal modal-common modal-search fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
@@ -311,6 +322,50 @@
                     (click)="slotsByPincodeAndDate();hideModalSearch()">Search</button>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<div bsModal #openSingleTileModal="bs-modal" class="modal modal-common modal-singleDetails fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header gradient-bx">
+                <h4 class="modal-title">Available Sessions</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModalSearch()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container-fluid singleTileData">
+                        <div *ngIf="selectedCentre">
+                            <p-table class="table-data" [value]="selectedCentre.sessions">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Vaccine Name</th>
+                                        <th>Available Capacity</th>
+                                        <th>Min Age Limit</th>
+                                        <th>Date</th>
+                                        <th>Time Slots</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-session>
+                                    <tr>
+                                        <td>{{session.vaccine}}</td>
+                                        <td>{{session.available_capacity}}</td>
+                                        <td>{{session.min_age_limit}}</td>
+                                        <td>{{session.date}}</td>
+                                        <td>
+                                            <span *ngFor="let sessionSlots of session.slots">{{sessionSlots}},<br/> </span>
+                                        </td> 
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>    
+                </div>
+            </div>
         </div>
     </div>
 </div>

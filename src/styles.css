@@ -310,11 +310,9 @@ header .navbar.bg-light {
     bottom: 3px;
 }
 .singleTileData .cart-single{
-    margin-bottom: 30px !important;
     width: 515px;
     padding-right: 110px;
-    margin-left: 0;
-    margin: auto;
+    margin:0 auto 18px;
 }
 .table-data{
     text-align: center;
@@ -324,10 +322,143 @@ header .navbar.bg-light {
     transform: translateY(0px);
     bottom: 0;
 }
+
+.modal-singleDetails .modal-body{
+    height: calc(100vh - 110px);
+    overflow-y: scroll;
+}
 .gradient-bx{
     position: relative;
     z-index: 1;
 }
+.modal-search .modal-body h3{
+    font-family: 'montserratsemibold';
+    color: #D3300E;   
+}
+.modal-common .modal-header {
+    padding: 10px 15px;
+    background: #369DC9 !important;
+}
+.modal-common .modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 20px;
+    color: #FFF;
+}
+.modal-common .modal-header .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+    color: #FFF;
+}
+.modal-singleDetails .modal-xl {
+    max-width: 1310px;
+}
+
+.position-relative{
+    position: relative;
+}
+
+.bubbles {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	transform: translateZ(0);
+}
+
+.bubbles li {
+	position: fixed;
+	list-style: none;
+	display: block;
+	bottom: -100px;
+    opacity: 0.2;
+	animation: circle 15s infinite;
+	transition-timing-function: linear;
+}
+
+.bubbles li:nth-child(1) {
+	width: 40px;
+	height: 40px;
+	left: 20%;
+}
+
+.bubbles li:nth-child(2) {
+	width: 60px;
+	height: 60px;
+	left: 40%;
+	animation-delay: 2s;
+	animation-duration: 16s;
+}
+
+.bubbles li:nth-child(3) {
+	width: 30px;
+	height: 30px;
+	left: 60%;
+	animation-delay: 4s;
+	animation-duration: 13s;
+}
+
+.bubbles li:nth-child(4) {
+	width: 80px;
+	height: 80px;
+	left: 80%;
+	animation-delay: 1s;
+	animation-duration: 19s;
+}
+
+.bubbles li:nth-child(5) {
+	width: 50px;
+	height: 50px;
+	left: 50%;
+	animation-delay: 5s;
+	animation-duration: 12s;
+}
+
+.bubbles li:nth-child(6) {
+	width: 25px;
+	height: 25px;
+	left: 10%;
+	animation-delay: 3s;
+	animation-duration: 11s;
+}
+
+.bubbles li:nth-child(7) {
+	width: 55px;
+	height: 55px;
+	left: 70%;
+	animation-delay: 2.5s;
+	animation-duration: 11s;
+}
+
+.bubbles li:nth-child(8) {
+	width: 75px;
+	height: 75px;
+	left: 30%;
+	animation-delay: 3.5s;
+	animation-duration: 11s;
+}
+
+@keyframes circle {
+	0% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+	100% {
+		-webkit-transform: translateY(-1080px);
+		transform: translateY(-1080px);
+	}
+}
+
+
+.fixed-covid img{
+    width: 100%;
+}
+
+
+
+
 .cart-single:after,
 .gradient-bx:after {
     position: absolute;

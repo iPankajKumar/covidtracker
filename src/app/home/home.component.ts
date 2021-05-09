@@ -39,11 +39,12 @@ export class HomeComponent implements OnInit {
   vaccinationSlotUrlByPinCode = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=";
   ageCategory: number = 0;
   resetCityDropdown: number = -1;
-
+  selectedCentre:any;
 
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
-  
+  @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;
+
   ngOnInit() {
     this.fetchStates();
     
@@ -69,6 +70,12 @@ export class HomeComponent implements OnInit {
 
   navigateToSessions(sessionObject) {
     this.router.navigate(['singleTile'], { state: { sessionData: sessionObject } });
+  }
+  opensingleTileModal(currentCenter){
+    this.selectedCentre = currentCenter;
+    if(this.selectedCentre){
+      this.openSingleTileModal.show();
+    }
   }
 
   fetchStates() {
