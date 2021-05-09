@@ -9,6 +9,32 @@ This project is an initiative taken by volunteers to help everyone search vaccin
 ![How to use  - Animated gif demo](demo/demo.gif)
 
 
+## Project Roadmap
+
+Here, are the current plan and progress of various components of this project. The components will be prioritized based on users requests and importance.
+
+### Sections
+
+- [x] **Vaccination Slots**
+
+  - [x] Search by multiple pin-code.
+  - [x] Auto refresh of results
+  - [x] Show by free-paid slots
+  - [x] Detailed info about sessions at centre.
+
+- [] **Search by District**
+
+  - [] Search by district id.
+  - [] Auto refresh.
+
+- [] **Download vaccination certificates**
+- [] **Covid statistics**
+- [] **Automatic slot booking**
+
+
+
+
+
 ## Technologies Used
 * [Angular 8](https://angular.io/)
 * [jQuery](https://jquery.com/)
@@ -23,4 +49,23 @@ This project is an initiative taken by volunteers to help everyone search vaccin
 
 The code in this project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-Note that you will be responsible for following terms of service of the third party APIs used in the code, we take no responisbilty of forked or cloned projects. 
+Note that you will be responsible for following terms of service of the third party APIs used in the code, we take no responisbilty of forked or cloned projects.
+
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+
+<table>
+  <tr>
+    <td align="center"><a href="https://ipankajsingh.com"><img src="https://avatars2.githubusercontent.com/u/24999656?v=4" width="100px;" alt=""/><br /><sub><b>Pankaj Singh</b></sub></a><br /></td>
+
+
+  <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/36234658?v=4" width="100px;" alt=""/><br /><sub><b>Prashant Giri</b></sub></a><br /></td>
+
+   <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/71484078?v=4" width="100px;" alt=""/><br /><sub><b>Saurabh Yadav</b></sub></a><br /></td>
+  </tr>
+</table>
+
+
