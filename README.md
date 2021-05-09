@@ -15,6 +15,8 @@ Here, are the current plan and progress of various components of this project. T
 
 ### Sections
 
+[x] Done    [] To do
+
 - [x] **Vaccination Slots**
 
   - [x] Search by multiple pin-code.
@@ -54,9 +56,9 @@ Note that you will be responsible for following terms of service of the third pa
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people :
 
-
+<!-- ([emoji key](https://allcontributors.org/docs/en/emoji-key)) -->
 <table>
   <tr>
     <td align="center"><a href="https://ipankajsingh.com"><img src="https://avatars2.githubusercontent.com/u/24999656?v=4" width="100px;" alt=""/><br /><sub><b>Pankaj Singh</b></sub></a><br /></td>
