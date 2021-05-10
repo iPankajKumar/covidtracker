@@ -211,10 +211,10 @@ export class HomeComponent implements OnInit {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
         let url = this.vaccinationSlotUrlByPinCode + this.selectedCodes[pIndex]['pinCode'] + "&date=" + moment(this.dateArrray[dIndex]).format("DD-MM-YYYY");
 
-        await this.sleepNow(2000);
+        await this.sleepNow(1500);
         let subscription = this.httpClient.get(url).subscribe((data) => {
           this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
-          this.validCenters(this.selectedCodes[pIndex]['pinCode']);
+          this.validCenters();
           subscription.unsubscribe();
 
         }, (error) => {
@@ -222,6 +222,10 @@ export class HomeComponent implements OnInit {
           return;
         });
       }
+    }
+
+    if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
+      this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
     }
 
    this.sleepThread();
@@ -238,7 +242,7 @@ export class HomeComponent implements OnInit {
   
   }
 
-  validCenters(currentPincode:any) {
+  validCenters() {
 
     if (this.vaccinationSlotCurrentResponse && this.vaccinationSlotCurrentResponse.centers.length > 0) {
       for (let centre in this.vaccinationSlotCurrentResponse.centers) {
@@ -284,7 +288,6 @@ export class HomeComponent implements OnInit {
     }
     this.isValidCenter = this.isCenterValid();
     if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
-      this.showToasterMessage('', 'We could not find any slots for ' + currentPincode + ' , we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
       this.noResultsFound = true;
       this.showSpinner = false;
       this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: false};
