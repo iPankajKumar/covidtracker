@@ -6,6 +6,11 @@ import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CountdownComponent } from 'ngx-countdown';
+import { interval } from 'rxjs';
+import { timer } from 'rxjs';
+import { delay, switchMap } from 'rxjs/operators'; 
+import { Observable } from 'rxjs';
+import { HomeService } from './home.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,7 +30,7 @@ export class HomeComponent implements OnInit {
   };
   isValidCenter:boolean = false;
   constructor(private httpClient: HttpClient, private modalService: BsModalService, 
-    private toastr: ToastrService, private router : Router) {
+    private toastr: ToastrService, private router : Router, private homeService: HomeService) {
     
   }
   
@@ -37,7 +42,6 @@ export class HomeComponent implements OnInit {
   vaccinationSlotCurrentResponse: any = [];
   vaccinationSlotAllResponse: any = [];
   timer = 0;
-  sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
   vaccinationSlotUrlByPinCode = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=";
   ageCategory: number = 0;
   resetCityDropdown: number = -1;
@@ -58,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchStates();
-    this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: true};
+    this.countdownConfig = {leftTime: this.countdownTimer, format: 'mm:ss', demand: true};
     this.dateValueSingle = new Date(moment().valueOf());
     this.minimumDate = new Date(moment().valueOf());
   }
@@ -193,7 +197,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async slotsByPincodeAndDate() {
+   slotsByPincodeAndDate() {
 
     this.isValidCenter = false;
     this.firstTimeOnHomePage =  false;
@@ -210,38 +214,28 @@ export class HomeComponent implements OnInit {
     
     for (let pIndex = 0; pIndex < this.selectedCodes.length; pIndex++) {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
-        let url = this.vaccinationSlotUrlByPinCode + this.selectedCodes[pIndex]['pinCode'] + "&date=" + moment(this.dateArrray[dIndex]).format("DD-MM-YYYY");
 
-        await this.sleepNow(1500);
-        let subscription = this.httpClient.get(url).subscribe((data) => {
+      let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pIndex]['pinCode'], moment(this.dateArrray[dIndex]).format("DD-MM-YYYY")).subscribe((data) => {
           this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
           this.validCenters();
-          subscription.unsubscribe();
+         subscription.unsubscribe();
 
         }, (error) => {
           this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
           return;
         });
+
       }
     }
-
-    // if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
-    //   this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
-    // }
-
-   this.sleepThread();
-
-  }
-
-  sleepThread(){
    
-      let myThis = this;
-      setInterval(function () {
-        myThis.slotsByPincodeAndDate();
-      }, 360000);
-      console.log("Sleeping for 6 min");
-  
+//in 6 min refresh again
+interval(this.countdownTimer*1000).subscribe(x => {
+  this.slotsByPincodeAndDate();
+});
+
+
   }
+
 
   validCenters() {
 
@@ -291,11 +285,11 @@ export class HomeComponent implements OnInit {
     if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
       this.noResultsFound = true;
       this.showSpinner = false;
-      this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: false};
+      this.countdownConfig = {leftTime: this.countdownTimer, format: 'mm:ss', demand: false};
     }else{
       this.noResultsFound =  false;
       this.showSpinner = false;
-      this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: false};
+      this.countdownConfig = {leftTime: this.countdownTimer, format: 'mm:ss', demand: false};
       
     }
     // console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);

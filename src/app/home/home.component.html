@@ -43,7 +43,7 @@
                                         <div class="no-res-image">
                                             <img src="../../assets/images/no-result.svg"/>
                                         </div>
-                                        <span>Hang in there! No results found this time, but we'll keep looking, or you can quickly change your preference.</span>
+                                        <span>Hang in there! No results found this time, but we'll refresh in <countdown [config]="countdownConfig"></countdown>, or you can quickly change your preference.</span>
                                     </div>
 
                                     <div class="bydefault-image" *ngIf="showSpinner">
