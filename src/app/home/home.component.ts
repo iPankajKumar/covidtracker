@@ -185,6 +185,13 @@ export class HomeComponent implements OnInit {
 
   }
 
+  showInfoToaster(){
+    if(this.selectedCodes.length>0){
+      this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
+     
+    }
+  }
+
   async slotsByPincodeAndDate() {
 
     this.isValidCenter = false;
@@ -197,7 +204,6 @@ export class HomeComponent implements OnInit {
     this.dateArrray.push(this.dateValueSingle);
 
     if(this.selectedCodes.length>0){
-      this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
       this.showSpinner = true;
     }
     
