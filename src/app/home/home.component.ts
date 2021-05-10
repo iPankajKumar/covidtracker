@@ -224,9 +224,9 @@ export class HomeComponent implements OnInit {
       }
     }
 
-    if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
-      this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
-    }
+    // if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
+    //   this.showToasterMessage('', 'We could not find any slots, we know how it feels, but we will keep trying or you can change your preferences.', 'warning');
+    // }
 
    this.sleepThread();
 
