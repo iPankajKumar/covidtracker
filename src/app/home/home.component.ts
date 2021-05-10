@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
   showSpinner: boolean =false;
  countdownConfig : any;
  countdownTimer:number= 360;
+ minimumDate :Date;
 
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
@@ -59,7 +60,7 @@ export class HomeComponent implements OnInit {
     this.fetchStates();
     this.countdownConfig = {leftTime: this.countdownTimer, format: 'm:s', demand: true};
     this.dateValueSingle = new Date(moment().valueOf());
-    
+    this.minimumDate = new Date(moment().valueOf());
   }
   
   clearResponse(){
