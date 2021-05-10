@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   noResultsFound: boolean = false;
   showSpinner: boolean = false;
   countdownConfig: any;
-  countdownTimer: number = 360;
+  countdownTimer: number = 300;
   minimumDate: Date;
 
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
@@ -197,7 +197,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  slotsByPincodeAndDate() {
+  async slotsByPincodeAndDate() {
 
     this.isValidCenter = false;
     this.firstTimeOnHomePage = false;
@@ -214,17 +214,10 @@ export class HomeComponent implements OnInit {
 
     for (let pIndex = 0; pIndex < this.selectedCodes.length; pIndex++) {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
-
-        let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pIndex]['pinCode'], moment(this.dateArrray[dIndex]).format("DD-MM-YYYY")).subscribe((data) => {
-          this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
-          this.validCenters();
-          subscription.unsubscribe();
-
-        }, (error) => {
-          this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
-          return;
-        });
-
+       
+        await new Promise(r => setTimeout(r, 2000));
+          this.fetchVaccinationSlots(pIndex, dIndex);
+      
       }
     }
 
@@ -233,6 +226,19 @@ export class HomeComponent implements OnInit {
       this.slotsByPincodeAndDate();
     });
 
+
+  }
+
+  fetchVaccinationSlots(pinIndex:any, dateIndex:any){
+    let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[dateIndex]).format("DD-MM-YYYY")).subscribe((data) => {
+      this.vaccinationSlotCurrentResponse = data;
+      this.validCenters();
+      subscription.unsubscribe();
+
+    }, (error) => {
+      this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
+      return;
+    });
 
   }
 
