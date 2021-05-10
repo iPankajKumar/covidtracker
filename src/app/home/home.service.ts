@@ -6,16 +6,16 @@ import { UrlConst } from "../common/UrlConst";
 
 @Injectable({
     providedIn: 'root'
-  })
-  export class HomeService{
-      
-    constructor(private http: HttpClient){
+})
+export class HomeService {
+
+    constructor(private http: HttpClient) {
 
     };
 
-    vaccinationSlotByPin(pinCodeArray:any, dateArray:any){
-        return this.http.get(UrlConst.vaccinationSlotByPin+pinCodeArray+"&date="+dateArray);
-         
+    vaccinationSlotByPin(pinCodeArray: any, dateArray: any) {
+        return this.http.get(UrlConst.vaccinationSlotByPin + pinCodeArray + "&date=" + dateArray);
+
     }
-    
-  }
+
+}

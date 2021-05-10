@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { CountdownComponent } from 'ngx-countdown';
 import { interval } from 'rxjs';
 import { timer } from 'rxjs';
-import { delay, switchMap } from 'rxjs/operators'; 
+import { delay, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HomeService } from './home.service';
 @Component({
@@ -28,12 +28,12 @@ export class HomeComponent implements OnInit {
   config = {
     animated: true
   };
-  isValidCenter:boolean = false;
-  constructor(private httpClient: HttpClient, private modalService: BsModalService, 
-    private toastr: ToastrService, private router : Router, private homeService: HomeService) {
-    
+  isValidCenter: boolean = false;
+  constructor(private httpClient: HttpClient, private modalService: BsModalService,
+    private toastr: ToastrService, private router: Router, private homeService: HomeService) {
+
   }
-  
+
   dateValueSingle: Date;
   dateValueFrom: Date;
   dateValueTo: Date;
@@ -45,15 +45,15 @@ export class HomeComponent implements OnInit {
   vaccinationSlotUrlByPinCode = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=";
   ageCategory: number = 0;
   resetCityDropdown: number = -1;
-  selectedCentre:any;
-  selectedState:any;
-  selectedCity:any;
-  firstTimeOnHomePage:boolean= true;
-  noResultsFound: boolean =false;
-  showSpinner: boolean =false;
- countdownConfig : any;
- countdownTimer:number= 360;
- minimumDate :Date;
+  selectedCentre: any;
+  selectedState: any;
+  selectedCity: any;
+  firstTimeOnHomePage: boolean = true;
+  noResultsFound: boolean = false;
+  showSpinner: boolean = false;
+  countdownConfig: any;
+  countdownTimer: number = 360;
+  minimumDate: Date;
 
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
@@ -62,18 +62,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchStates();
-    this.countdownConfig = {leftTime: this.countdownTimer, format: 'mm:ss', demand: true};
+    this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: true };
     this.dateValueSingle = new Date(moment().valueOf());
     this.minimumDate = new Date(moment().valueOf());
   }
-  
-  clearResponse(){
+
+  clearResponse() {
     this.vaccinationSlotAllResponse = [];
   }
-  clearAll(){
+  clearAll() {
     this.vaccinationSlotAllResponse = [];
     this.isValidCenter = this.isCenterValid();
-    this.firstTimeOnHomePage =  true;
+    this.firstTimeOnHomePage = true;
   }
   hideModal() {
     this.autoShownModal.hide();
@@ -88,15 +88,15 @@ export class HomeComponent implements OnInit {
   searchSlotModal() {
     this.searchModal.show();
   }
-  hideAvailableSessionModal(){
+  hideAvailableSessionModal() {
     this.openSingleTileModal.hide();
   }
   navigateToSessions(sessionObject) {
     this.router.navigate(['singleTile'], { state: { sessionData: sessionObject } });
   }
-  opensingleTileModal(currentCenter){
+  opensingleTileModal(currentCenter) {
     this.selectedCentre = currentCenter;
-    if(this.selectedCentre){
+    if (this.selectedCentre) {
       this.openSingleTileModal.show();
     }
   }
@@ -109,8 +109,8 @@ export class HomeComponent implements OnInit {
     //Sort states alphabetically.
     for (let stateIndex = 0; stateIndex < indianState.length; stateIndex++) {
       let state = {
-        name : indianState[stateIndex],
-        code : indianState[stateIndex]
+        name: indianState[stateIndex],
+        code: indianState[stateIndex]
       }
       this.indianStates.push(state);
     }
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
   fetchCities(stateName: string) {
     this.indianCities = [];
     this.areaCode = [];
-    this.selectedCodes= [];
+    this.selectedCodes = [];
     this.resetCityDropdown = -1;
     var allIndiaStates = AllIndiaPincodes['default'];
     //get all cities 
@@ -129,10 +129,10 @@ export class HomeComponent implements OnInit {
     // uniq all cities
     var allCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
     //console.log("allCities", allCities);
-    allCities.forEach((element:any) => {
+    allCities.forEach((element: any) => {
       let city = {
-        name : element,
-        code : element
+        name: element,
+        code: element
       }
       this.indianCities.push(city);
     });
@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit {
 
   fetchPinCodeByCities(city: any) {
     this.areaCode = [];
-    this.selectedCodes= [];
+    this.selectedCodes = [];
     var allIndiaCities = AllIndiaPincodes['default'];
     //Filter Data by city names
     var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city);
@@ -190,35 +190,35 @@ export class HomeComponent implements OnInit {
 
   }
 
-  showInfoToaster(){
-    if(this.selectedCodes.length>0){
+  showInfoToaster() {
+    if (this.selectedCodes.length > 0) {
       this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
-     
+
     }
   }
 
-   slotsByPincodeAndDate() {
+  slotsByPincodeAndDate() {
 
     this.isValidCenter = false;
-    this.firstTimeOnHomePage =  false;
-    this.noResultsFound =  false;
+    this.firstTimeOnHomePage = false;
+    this.noResultsFound = false;
     this.vaccinationSlotCurrentResponse = [];
     this.searchModal.hide();
     console.log("Trial counter", this.trialCounter++);
     this.dateArrray = [];
     this.dateArrray.push(this.dateValueSingle);
 
-    if(this.selectedCodes.length>0){
+    if (this.selectedCodes.length > 0) {
       this.showSpinner = true;
     }
-    
+
     for (let pIndex = 0; pIndex < this.selectedCodes.length; pIndex++) {
       for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
 
-      let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pIndex]['pinCode'], moment(this.dateArrray[dIndex]).format("DD-MM-YYYY")).subscribe((data) => {
+        let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pIndex]['pinCode'], moment(this.dateArrray[dIndex]).format("DD-MM-YYYY")).subscribe((data) => {
           this.vaccinationSlotCurrentResponse = data;//JSON.parse(data);
           this.validCenters();
-         subscription.unsubscribe();
+          subscription.unsubscribe();
 
         }, (error) => {
           this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
@@ -227,11 +227,11 @@ export class HomeComponent implements OnInit {
 
       }
     }
-   
-//in 6 min refresh again
-interval(this.countdownTimer*1000).subscribe(x => {
-  this.slotsByPincodeAndDate();
-});
+
+    //in 6 min refresh again
+    interval(this.countdownTimer * 1000).subscribe(x => {
+      this.slotsByPincodeAndDate();
+    });
 
 
   }
@@ -266,7 +266,7 @@ interval(this.countdownTimer*1000).subscribe(x => {
         //Add current centers to global centers to concat rest response
         if (this.vaccinationSlotAllResponse.length > 0) {
           let centreExists = this.checkIfCentreExists(this.vaccinationSlotCurrentResponse.centers[centre]);
-          
+
           if (centreExists) {
 
             this.updateCentre(this.vaccinationSlotCurrentResponse.centers[centre]);
@@ -285,12 +285,12 @@ interval(this.countdownTimer*1000).subscribe(x => {
     if (!this.vaccinationSlotAllResponse.length || !this.isValidCenter) {
       this.noResultsFound = true;
       this.showSpinner = false;
-      this.countdownConfig = {leftTime: this.countdownTimer, format: 'mm:ss', demand: false};
-    }else{
-      this.noResultsFound =  false;
+      this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: false };
+    } else {
+      this.noResultsFound = false;
       this.showSpinner = false;
-      this.countdownConfig = {leftTime: this.countdownTimer, format: 'mm:ss', demand: false};
-      
+      this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: false };
+
     }
     // console.log("All data->>>>>>>>>>> ", this.vaccinationSlotCurrentResponse);
     // console.log("Valid data->>>>>>>>>>> ", this.vaccinationSlotAllResponse);
@@ -322,7 +322,7 @@ interval(this.countdownTimer*1000).subscribe(x => {
   /**
    * checkAvailableSlots
    */
-  public isCenterValid():boolean {
+  public isCenterValid(): boolean {
     let found = false;
     this.vaccinationSlotAllResponse.forEach(function (item) {
       if (item.isValidCentre) {
@@ -333,10 +333,10 @@ interval(this.countdownTimer*1000).subscribe(x => {
     return found;
   }
 
-  
-  
 
-    
+
+
+
 }
 
 
