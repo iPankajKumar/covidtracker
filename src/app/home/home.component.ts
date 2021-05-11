@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
   noResultsFound: boolean = false;
   showSpinner: boolean = false;
   countdownConfig: any;
-  countdownTimer: number = 300;
+  countdownTimer: number = 60;
   minimumDate: Date;
 
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
@@ -217,10 +217,15 @@ export class HomeComponent implements OnInit {
     this.delayedLoop(this.selectedCodes.length, 0);
 
     //in 5 min refresh again
-    interval((this.countdownTimer + 6) * 1000).subscribe(x => {
+    // interval((this.countdownTimer + 6) * 1000).subscribe(x => {
+    //   this.initializeSearch();
+    //   this.delayedLoop(this.selectedCodes.length, 0);
+    // });
+
+    setInterval(() => {
       this.initializeSearch();
       this.delayedLoop(this.selectedCodes.length, 0);
-    });
+    }, ((this.countdownTimer+this.selectedCodes.length)*1000)); //adding this.selectedCodes.length to compensate for 1 sec delay between every API call in delayedLoop() method
 
   }
 
@@ -235,8 +240,8 @@ export class HomeComponent implements OnInit {
         if (--arrLength) {
           tempIndex++;
           myThis.delayedLoop(arrLength,tempIndex);
-        }   //  decrement i and call myLoop again if i > 0
-      }, 1500)
+        }   //  decrement i and call delayedLoop again if i > 0
+      }, 1000)
     }
   }
 
