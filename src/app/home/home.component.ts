@@ -38,11 +38,10 @@ export class HomeComponent implements OnInit {
   dateValueFrom: Date;
   dateValueTo: Date;
   trialCounter = 1;
-  dateArrray = [];
+  dateArrray :any;
   vaccinationSlotCurrentResponse: any = [];
   vaccinationSlotAllResponse: any = [];
   timer = 0;
-  vaccinationSlotUrlByPinCode = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=";
   ageCategory: number = 0;
   resetCityDropdown: number = -1;
   selectedCentre: any;
@@ -65,6 +64,7 @@ export class HomeComponent implements OnInit {
     this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: true };
     this.dateValueSingle = new Date(moment().valueOf());
     this.minimumDate = new Date(moment().valueOf());
+
   }
 
   clearResponse() {
@@ -197,7 +197,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async slotsByPincodeAndDate() {
+  slotsByPincodeAndDate() {
 
     this.isValidCenter = false;
     this.firstTimeOnHomePage = false;
@@ -211,22 +211,31 @@ export class HomeComponent implements OnInit {
     if (this.selectedCodes.length > 0) {
       this.showSpinner = true;
     }
-
-    for (let pIndex = 0; pIndex < this.selectedCodes.length; pIndex++) {
-      for (let dIndex = 0; dIndex < this.dateArrray.length; dIndex++) {
-       
-        await new Promise(r => setTimeout(r, 2000));
-          this.fetchVaccinationSlots(pIndex, dIndex);
-      
-      }
-    }
+    console.log("this.selectedCodes",this.selectedCodes);
+    
+    this.delayedLoop(this.selectedCodes.length, 0);
 
     //in 6 min refresh again
-    interval(this.countdownTimer * 1000).subscribe(x => {
-      this.slotsByPincodeAndDate();
+    interval((this.countdownTimer + 9) * 1000).subscribe(x => {
+      this.delayedLoop(this.selectedCodes.length, 0);
     });
 
+  }
 
+  delayedLoop(i:any,pIndex:any) {
+    let arrLength =  i;
+    let tempIndex = pIndex;
+    if(this.selectedCodes && pIndex <  this.selectedCodes.length){
+      let myThis = this;
+      setTimeout(function() {
+        myThis.fetchVaccinationSlots(tempIndex,this.dateArrray);  
+        console.log(arrLength,tempIndex);
+        if (--arrLength) {
+          tempIndex++;
+          myThis.delayedLoop(arrLength,tempIndex);
+        }   //  decrement i and call myLoop again if i > 0
+      }, 1500)
+    }
   }
 
   fetchVaccinationSlots(pinIndex:any, dateIndex:any){
@@ -234,8 +243,8 @@ export class HomeComponent implements OnInit {
       this.vaccinationSlotCurrentResponse = data;
       this.validCenters();
       subscription.unsubscribe();
-
     }, (error) => {
+      console.log("error",error);
       this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
       return;
     });
