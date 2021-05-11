@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
 import * as AllIndiaPincodes from '../../assets/json/AllIndiaPincodes.json';
 import { HttpClient } from "@angular/common/http";
@@ -7,9 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CountdownComponent } from 'ngx-countdown';
 import { interval } from 'rxjs';
-import { timer } from 'rxjs';
-import { delay, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { HomeService } from './home.service';
 @Component({
   selector: 'app-home',
@@ -197,8 +194,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  slotsByPincodeAndDate() {
-
+  initializeSearch(){
     this.isValidCenter = false;
     this.firstTimeOnHomePage = false;
     this.noResultsFound = false;
@@ -211,12 +207,18 @@ export class HomeComponent implements OnInit {
     if (this.selectedCodes.length > 0) {
       this.showSpinner = true;
     }
+  }
+
+  slotsByPincodeAndDate() {
+
+    this.initializeSearch();
     console.log("this.selectedCodes",this.selectedCodes);
     
     this.delayedLoop(this.selectedCodes.length, 0);
 
-    //in 6 min refresh again
-    interval((this.countdownTimer + 9) * 1000).subscribe(x => {
+    //in 5 min refresh again
+    interval((this.countdownTimer + 6) * 1000).subscribe(x => {
+      this.initializeSearch();
       this.delayedLoop(this.selectedCodes.length, 0);
     });
 
