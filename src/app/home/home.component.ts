@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
     animated: true
   };
   isValidCenter: boolean = false;
+  refreshIntervalCalls:any;
   constructor(private httpClient: HttpClient, private modalService: BsModalService,
     private toastr: ToastrService, private router: Router, private homeService: HomeService) {
 
@@ -222,7 +223,7 @@ export class HomeComponent implements OnInit {
     //   this.delayedLoop(this.selectedCodes.length, 0);
     // });
 
-    setInterval(() => {
+    this.refreshIntervalCalls = setInterval(() => {
       this.initializeSearch();
       this.delayedLoop(this.selectedCodes.length, 0);
     }, ((this.countdownTimer+this.selectedCodes.length)*1000)); //adding this.selectedCodes.length to compensate for 1 sec delay between every API call in delayedLoop() method
@@ -252,6 +253,9 @@ export class HomeComponent implements OnInit {
       subscription.unsubscribe();
     }, (error) => {
       console.log("error",error);
+      this.selectedCodes = [];
+      this.showSpinner = false;
+      clearInterval(this.refreshIntervalCalls);
       this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
       return;
     });
