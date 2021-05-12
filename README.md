@@ -51,7 +51,7 @@ Here, are the current plan and progress of various components of this project. T
 
 The code in this project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-Note that you will be responsible for following terms of service of the third party APIs used in the code, we take no responisbilty of forked or cloned projects.
+Note that you will be responsible for following terms of service of the third party APIs used in the code, we take no responsibility of forked or cloned projects.
 
 
 ## Contributors
