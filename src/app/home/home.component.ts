@@ -207,7 +207,7 @@ export class HomeComponent implements OnInit {
     this.noResultsFound = false;
     this.vaccinationSlotCurrentResponse = [];
     this.searchModal.hide();
-    console.log("Trial counter", this.trialCounter++);
+    //console.log("Trial counter", this.trialCounter++);
     this.dateArrray = [];
     this.dateArrray.push(this.dateValueSingle);
 
@@ -219,7 +219,7 @@ export class HomeComponent implements OnInit {
   slotsByPincodeAndDate() {
 
     this.initializeSearch();
-    console.log("this.selectedCodes",this.selectedCodes);
+    //console.log("this.selectedCodes",this.selectedCodes);
     
     this.delayedLoop(this.selectedCodes.length, 0);
 
@@ -243,7 +243,7 @@ export class HomeComponent implements OnInit {
       let myThis = this;
       setTimeout(function() {
         myThis.fetchVaccinationSlots(tempIndex,this.dateArrray);  
-        console.log(arrLength,tempIndex);
+        //console.log(arrLength,tempIndex);
         if (--arrLength) {
           tempIndex++;
           myThis.delayedLoop(arrLength,tempIndex);
@@ -262,7 +262,7 @@ export class HomeComponent implements OnInit {
         this.validCenters();
         subscription.unsubscribe();
       }, (error) => {
-        console.log("error",error);
+        //console.log("error",error);
         this.tempPinArray =  cloneDeep(this.selectedCodes);
         this.selectedCodes = [];
         this.showSpinner = false;
