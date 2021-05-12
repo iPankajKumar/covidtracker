@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CountdownComponent } from 'ngx-countdown';
 import { interval } from 'rxjs';
 import { HomeService } from './home.service';
+import cloneDeep from 'lodash/cloneDeep';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   indianCities: any = [];
   areaCode: any[] = [];
   selectedCodes: string[] = [];
+  tempPinArray: string[] = [];
   http: any;
   modalRef: BsModalRef;
   config = {
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
   noResultsFound: boolean = false;
   showSpinner: boolean = false;
   countdownConfig: any;
-  countdownTimer: number = 60;
+  countdownTimer: number = 300;
   minimumDate: Date;
 
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
@@ -72,6 +74,7 @@ export class HomeComponent implements OnInit {
     this.vaccinationSlotAllResponse = [];
     this.isValidCenter = this.isCenterValid();
     this.firstTimeOnHomePage = true;
+    clearInterval(this.refreshIntervalCalls);
   }
   hideModal() {
     this.autoShownModal.hide();
@@ -84,6 +87,9 @@ export class HomeComponent implements OnInit {
     this.autoShownModal.hide();
   }
   searchSlotModal() {
+    if(this.tempPinArray && this.tempPinArray.length>0){
+        this.selectedCodes = this.tempPinArray;
+    }
     this.searchModal.show();
   }
   hideAvailableSessionModal() {
@@ -244,22 +250,27 @@ export class HomeComponent implements OnInit {
         }   //  decrement i and call delayedLoop again if i > 0
       }, 1000)
     }
+
+
   }
 
   fetchVaccinationSlots(pinIndex:any, dateIndex:any){
-    let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[dateIndex]).format("DD-MM-YYYY")).subscribe((data) => {
-      this.vaccinationSlotCurrentResponse = data;
-      this.validCenters();
-      subscription.unsubscribe();
-    }, (error) => {
-      console.log("error",error);
-      this.selectedCodes = [];
-      this.showSpinner = false;
-      clearInterval(this.refreshIntervalCalls);
-      this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
-      return;
-    });
 
+    if(this.selectedCodes && this.selectedCodes.length>0){
+      let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[dateIndex]).format("DD-MM-YYYY")).subscribe((data) => {
+        this.vaccinationSlotCurrentResponse = data;
+        this.validCenters();
+        subscription.unsubscribe();
+      }, (error) => {
+        console.log("error",error);
+        this.tempPinArray =  cloneDeep(this.selectedCodes);
+        this.selectedCodes = [];
+        this.showSpinner = false;
+        clearInterval(this.refreshIntervalCalls);
+        this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
+        return;
+      });
+    }
   }
 
 
