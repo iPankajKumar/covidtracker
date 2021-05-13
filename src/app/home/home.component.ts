@@ -282,16 +282,16 @@ export class HomeComponent implements OnInit {
         this.vaccinationSlotCurrentResponse.centers[centre].availableSlotsCount = 0;
         for (let session in this.vaccinationSlotCurrentResponse.centers[centre].sessions) {
 
-          if (this.ageCategory == 1) {
-            if (this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].min_age_limit > 44 && this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].available_capacity > 0) {
+          if (this.ageCategory == 2) {
+            if (this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].min_age_limit == 45 && this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].available_capacity > 0) {
 
               this.vaccinationSlotCurrentResponse.centers[centre].isValidCentre = true;
               this.vaccinationSlotCurrentResponse.centers[centre].availableSlotsCount++;
 
 
             }
-          } else if (this.ageCategory == 0) {
-            if (this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].min_age_limit > 17 && this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].available_capacity > 0) {
+          } else if (this.ageCategory == 1) {
+            if (this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].min_age_limit ==18 && this.vaccinationSlotCurrentResponse.centers[centre].sessions[session].available_capacity > 0) {
 
               this.vaccinationSlotCurrentResponse.centers[centre].isValidCentre = true; // custom flag to decide if the centre is valid for UI
               this.vaccinationSlotCurrentResponse.centers[centre].availableSlotsCount++; // to show slots count
