@@ -16,6 +16,7 @@ import { CountdownModule } from 'ngx-countdown';
 import {TableModule} from 'primeng/table';
 import { SingleTileComponent } from './single-tile/single-tile.component';
 import {DropdownModule} from 'primeng/dropdown';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 @Pipe({
   name: "sort"
@@ -58,7 +59,7 @@ export class ArraySortPipe {
     DropdownModule,
     CountdownModule
   ],
-  providers: [],
+  providers: [GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
