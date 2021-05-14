@@ -350,9 +350,6 @@ header .navbar.bg-light {
     margin: -1rem -1rem -1rem auto;
     color: #FFF;
 }
-.modal-singleDetails .modal-xl {
-    max-width: 1310px;
-}
 
 .position-relative{
     position: relative;
@@ -547,7 +544,6 @@ header .navbar.bg-light {
 .cart-data .col-xl-1{
     flex: 0 0 25px;
     max-width: 25px;
-    margin-right: 5px;
     text-align: center;
 }
 
@@ -676,4 +672,76 @@ body .singleTileData .ui-table .ui-table-thead > tr > th {
 
   .footer-right-content i{
     color: #f32c2c;
+  }
+
+
+  @media screen and (min-width:300px){
+    .width-100p.row {
+        margin-left: 0;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199px){
+    .cart-data .col-xl-11 {
+        flex: 0 0 90%;
+        max-width: 90%;
+    }
+  }
+
+
+  @media screen and (max-width: 767px){
+    .toast-container.toast-top-center .ngx-toastr, 
+    .toast-container.toast-bottom-center .ngx-toastr {
+        width: 300px;
+    }
+    header {
+        position: relative;
+    }
+    header .navbar-light .navbar-brand {
+        width: 165px;
+    }
+    .main-container {
+        padding-top: 0;
+    }
+    .component-container {
+        padding: 5px 0;
+    }
+    .btn-primary,
+    .btn-secondary {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+
+    .navbar-light .navbar-toggler {
+        display: none;
+    }
+    .footer-left-content,
+    .footer-center-content,
+    .footer-right-content {
+        text-align: center;
+    }
+    header .navbar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .book-btn {
+        padding-top: 4px;
+        float: right;
+    }
+    .btn-book-slot {
+        display: block;
+        width: 140px;
+    }
+    .cart-single {
+        margin: 0 0px;
+        padding: 15px 15px 20px;
+    }
+    .cart-data .col-xl-1 {
+       margin-right: 0;
+    }
+    .cart-single:hover {
+        transition: all .5s;
+        transform: translateY(0px);
+        bottom: 0px;
+    }
+    
   }

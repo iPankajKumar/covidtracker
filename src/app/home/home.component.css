@@ -3,7 +3,7 @@
     top: 72px;
     left: 0;
     width: 100%;
-    padding: 20px 30px;
+    padding: 20px 15px;
     background: #FFF;
     z-index: 9;
     -webkit-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
@@ -206,4 +206,124 @@ body .ui-multiselect .ui-multiselect-label {
 
   .modal-welcome .modal-body{
       text-align: center;
+  }
+
+  @media (min-width:767px) and (max-width:1350){
+    .modal-common .modal-dialog {
+        max-width: 90%;
+    }
+  }
+  @media (min-width:992px) and (max-width:1199px){
+    .cart-list ul li {
+        width: 50%;
+        float: left;
+    }
+    .cart-data .col-xl-1 {
+        margin-right: 0;
+     
+    }
+    .top-strip {
+        padding: 20px 15px;
+    }
+    .btn-primary,
+    .btn-secondary {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+    .navbar-light .navbar-toggler{
+        display: none;
+    }
+    .singleTileData{
+        width: 1000px;
+        overflow-x: scroll;
+    }
+    .timerCount {
+        font-size: 14px;
+    }
+    .timerCount {
+        margin: 0px;
+        font-size: 14px;
+    }
+}
+
+
+@media (min-width:768px) and (max-width:991px){
+    .modal-common .modal-dialog {
+        max-width: 750px;
+    }
+    .cart-list ul li {
+        width: 50%;
+        float: left;
+    }
+    .cart-data .col-xl-1 {
+        margin-right: 0;
+     
+    }
+    .top-strip {
+        padding: 20px 10px;
+    }
+    .btn-primary,
+    .btn-secondary {
+        font-size: 14px;
+        padding: 8px 8px;
+    }
+    .navbar-light .navbar-toggler{
+        display: none;
+    }
+    .singleTileData{
+        width: 1000px;
+        overflow-x: scroll;
+    }
+    .timerCount {
+        font-size: 14px;
+    }
+    .timerCount {
+        margin: 0px;
+        font-size: 14px;
+    }
+}
+
+  @media screen and (max-width: 767px){
+    
+    .modal-singleDetails .modal-xl {
+        max-width: 90%;
+    }
+    .top-strip {
+        position: relative;
+        top: 0px;
+        padding: 20px 15px;
+    }
+    .cart-container {
+        margin-top: 0;
+        height: auto;
+        overflow-y: auto;
+    }
+    .bydefault-image {
+        width: auto;
+        height: auto;
+        margin: auto;
+        position: relative;
+    }
+    .cart-list ul li {
+        width: 100%;
+        float: none;
+    }
+    .timerCount {
+        margin: 0 auto 10px;
+        font-size: 14px;
+    }
+    .suggestions {
+        width: 160px;
+    }
+    .suggestions .notes:nth-child(2) {
+        margin-right: 5px;
+    }
+    .button-area {
+        float: none;
+        text-align: center;
+    }
+    .singleTileData{
+        width: 1000px;
+        overflow-x: scroll;
+    }
   }

@@ -8,7 +8,7 @@
                             <div class="col-xl-12">
                                 <div class="container-fluid top-strip">
                                     <div class="row">
-                                        <div class="col-xl-4">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                             <div class="timerCount" *ngIf="noResultsFound && !firstTimeOnHomePage || isValidCenter">
                                                 <i class="fas fa-stopwatch"></i>
                                                 Refreshing in <span></span>
@@ -16,14 +16,14 @@
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4">
+                                        <div class="col-xl-4 col-lg-4 col-md-3 col-sm-12 col-12">
                                             <div class="suggestions" *ngIf="isValidCenter">
                                                 <div class="notes"><span class="free"></span> Free</div>
                                                 <div class="notes"><span class="paid"></span> Paid</div>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4">
+                                        <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
                                             <div class="button-area">
                                                 <button type="button" class="btn-change btn-primary common-btn" (click)="searchSlotModal()">Change Preference</button>
                                                 <button type="button" (click)="clearAll()" [disabled]="!isValidCenter" class="btn-clear btn-secondary common-btn margin-left-10">Clear All</button>
@@ -66,14 +66,11 @@
                                                             <div class="center-name">
                                                                 <div class="container-fluid">
                                                                     <div class="row">
-                                                                        <div class="col-xl-1 padding-lr-0">
+                                                                        <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 padding-lr-0">
                                                                             <i class="far fa-hospital"></i>
                                                                         </div>
-                                                                        <div class="col-xl-11 padding-lr-0">
+                                                                        <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 padding-lr-0">
                                                                             {{centre.name}}
-                                                                        </div>
-                                                                        <div class="col-xl-4 custom-4 padding-lr-0">
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -81,10 +78,10 @@
                                                             <div class="center-address">
                                                                 <div class="container-fluid">
                                                                     <div class="row">
-                                                                        <div class="col-xl-1 padding-lr-0">
+                                                                        <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 padding-lr-0">
                                                                             <i class="fas fa-map-marker-alt"></i>
                                                                         </div>
-                                                                        <div class="col-xl-11 padding-lr-0">
+                                                                        <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 padding-lr-0">
                                                                             {{centre.address}}, {{centre.district_name}},
                                                                             {{centre.pincode}}
                                                                         </div>
@@ -95,10 +92,10 @@
                                                             <div class="max-capacity">
                                                                 <div class="container-fluid">
                                                                     <div class="row">
-                                                                        <div class="col-xl-1 padding-lr-0">
+                                                                        <div class="col-xl-1 col-lg-1 col-md-3 col-sm-1 col-3 padding-lr-0">
                                                                             <i class="fas fa-users"></i>
                                                                         </div>
-                                                                        <div class="col-xl-11 padding-lr-0">
+                                                                        <div class="col-xl-11 col-lg-11 col-md-9 col-sm-11 col-9 padding-lr-0">
                                                                             {{centre.availableSlotsCount}} sessions
                                                                             available <span class="btn-view-more"><i class="far fa-eye"></i> View slots</span>
                                                                         </div>
@@ -171,7 +168,7 @@
                 <div class="container-fluid">
                     <div class="margin-bottom-40">
                         <div class="row">
-                            <div class="col-xl-4">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>State</label>
                                     <div>
@@ -190,7 +187,7 @@
                                   
                                 </div>
                             </div>
-                            <div class="col-xl-4">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>City</label>
                                     <div>
@@ -209,7 +206,7 @@
                                  
                                 </div>
                             </div>
-                            <div class="col-xl-4">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>Pincode</label>
                                     <p-multiSelect [options]="areaCode" [(ngModel)]="selectedCodes"
@@ -217,15 +214,12 @@
                                     </p-multiSelect>
                                 </div>
                             </div>
-                            <div class="col-xl-4">
-
-                            </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                     <div>
                         <div class="row">
-                            <div class="col-xl-4">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>Date</label>
                                     <p-calendar [minDate]="minimumDate" [(ngModel)]="dateValueSingle" [monthNavigator]="true"
@@ -233,7 +227,7 @@
                                         [touchUI]="false" [showIcon]="true" [readonlyInput]="true"></p-calendar>
                                 </div>
                             </div>
-                            <div class="col-xl-8">
+                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>Age Group</label>
                                     <div class="margin-top-8">
