@@ -2,7 +2,17 @@
     <div class="position-relative">
         <div class="row">
             <div class="col-xl-12">
-                <div>
+                <div class="notification">
+                    <span>
+                        <i class="fas fa-exclamation-circle"></i>You are using public coWIN API, 
+                    the data might be 30 min old, and the limit is 100 requests every 5 min, please use wisely.
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                
                     <div class="container-fluid padding-lr-0">
                         <div class="row">
                             <div class="col-xl-12">
@@ -115,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                
             </div>
         </div>
        
@@ -264,10 +274,22 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header gradient-bx">
-                <h4 class="modal-title">Available Sessions</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="hideAvailableSessionModal()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 col-7">
+                            <h4 class="modal-title">Available Sessions</h4>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-5">
+                            <div class="book-btn">
+                                <a href="https://selfregistration.cowin.gov.in/" target="_blank" class="btn-book-slot btn-primary common-btn">Book my Slot</a>
+                            </div>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="hideAvailableSessionModal()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Modal body -->

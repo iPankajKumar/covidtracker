@@ -281,7 +281,7 @@ header .navbar.bg-light {
     pointer-events: none;
 }
 .book-btn{
-    padding-top: 12px;
+    
     float: right;
 }
 
@@ -674,7 +674,20 @@ body .singleTileData .ui-table .ui-table-thead > tr > th {
     color: #f32c2c;
   }
 
-
+  .modal-singleDetails.modal-common .modal-title{
+    padding-top: 6px;
+  }
+  .modal-singleDetails .close{
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      
+  }
+  .book-btn .btn-primary:hover, 
+  .book-btn .btn-primary:focus {
+    border: 1px solid rgb(255, 255, 255);
+    color: #ffffff;
+}
   @media screen and (min-width:300px){
     .width-100p.row {
         margin-left: 0;
@@ -686,22 +699,26 @@ body .singleTileData .ui-table .ui-table-thead > tr > th {
         max-width: 90%;
     }
   }
-
+  @media screen and (max-width:1199px){
+    header {
+        position: relative;
+    }
+    .main-container {
+        padding-top: 0;
+    }
+    
+}
 
   @media screen and (max-width: 767px){
     .toast-container.toast-top-center .ngx-toastr, 
     .toast-container.toast-bottom-center .ngx-toastr {
         width: 300px;
     }
-    header {
-        position: relative;
-    }
+    
     header .navbar-light .navbar-brand {
         width: 165px;
     }
-    .main-container {
-        padding-top: 0;
-    }
+   
     .component-container {
         padding: 5px 0;
     }
@@ -724,7 +741,6 @@ body .singleTileData .ui-table .ui-table-thead > tr > th {
         padding-bottom: 10px;
     }
     .book-btn {
-        padding-top: 4px;
         float: right;
     }
     .btn-book-slot {

@@ -1,6 +1,6 @@
 .top-strip{
     position: fixed;
-    top: 72px;
+    top: 99px;
     left: 0;
     width: 100%;
     padding: 20px 15px;
@@ -9,6 +9,21 @@
     -webkit-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
     -moz-box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
     box-shadow: 0 5px 7px -7px rgba(0,0,0,0.7);
+}
+.notification{
+    font-size: 13px;
+    text-align: center;
+    background:#6587ff;
+    color: #FFF;
+    padding: 5px 0;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+}
+.notification i{
+    margin-right: 5px; 
 }
 .title{
     font-size: 22px;
@@ -40,8 +55,8 @@
     margin-bottom: 15px;
 }
 .cart-container{
-    margin-top: 70px;
-    height: calc(100vh - 220px);
+    margin-top: 102px;
+    height: calc(100vh - 252px);
     overflow-y: scroll;
     padding-top: 30px;
 }
@@ -208,6 +223,9 @@ body .ui-multiselect .ui-multiselect-label {
       text-align: center;
   }
 
+  
+
+
   @media (min-width:767px) and (max-width:1350){
     .modal-common .modal-dialog {
         max-width: 90%;
@@ -283,16 +301,39 @@ body .ui-multiselect .ui-multiselect-label {
     }
 }
 
-  @media screen and (max-width: 767px){
-    
-    .modal-singleDetails .modal-xl {
-        max-width: 90%;
+@media screen and (max-width:1199px){
+    .component-container {
+        padding: 0;
     }
     .top-strip {
         position: relative;
         top: 0px;
         padding: 20px 15px;
     }
+    .notification {
+        position: relative;
+        top: 0;
+        padding: 5px 5px;
+    }
+    .cart-container {
+        margin-top: 0;
+        height: auto;
+        overflow-y: auto;
+        padding-top: 30px;
+    }
+    .bydefault-image {
+        width: 60%;
+        height: auto;
+        margin: auto;
+        position: relative;
+    }
+}
+  @media screen and (max-width: 767px){
+    
+    .modal-singleDetails .modal-xl {
+        max-width: 90%;
+    }
+    
     .cart-container {
         margin-top: 0;
         height: auto;
