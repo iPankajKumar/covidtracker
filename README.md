@@ -15,7 +15,7 @@ Here, are the current plan and progress of various components of this project. T
 
 ### Sections
 
-- [x] Done    - [] To do
+- [x] Done        - [ ] To do
 
 - [x] **Vaccination Slots**
 
@@ -24,14 +24,14 @@ Here, are the current plan and progress of various components of this project. T
   - [x] Show by free-paid slots
   - [x] Detailed info about sessions at centre.
 
-- [] **Search by District**
+- [ ] **Search by District**
 
-  - [] Search by district id.
-  - [] Auto refresh.
+  - [ ] Search by district id.
+  - [ ] Auto refresh.
 
-- [] **Download vaccination certificates**
-- [] **Covid statistics**
-- [] **Automatic slot booking**
+- [ ] **Download vaccination certificates**
+- [ ] **Covid statistics**
+- [ ] **Automatic slot booking**
 
 
 
