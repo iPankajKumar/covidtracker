@@ -15,7 +15,7 @@ Here, are the current plan and progress of various components of this project. T
 
 ### Sections
 
-- [x] Done    - [ ] To do
+- [x] Done        - [ ] To do
 
 - [x] **Vaccination Slots**
 
