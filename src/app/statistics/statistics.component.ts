@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { STATE_CODES, STATE_CODES_ARRAY } from '../common/Constants';
 import { StatisticService } from './statistics.service';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -34,8 +33,6 @@ export class StatisticsComponent implements OnInit {
       subscription.unsubscribe();
     }, (error) => {
       console.log("error", error);
-
-
     });
 
 
