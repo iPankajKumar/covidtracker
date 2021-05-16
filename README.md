@@ -67,6 +67,10 @@ Thanks goes to these wonderful people :
   <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/36234658?v=4" width="100px;" alt=""/><br /><sub><b>Prashant Giri</b></sub></a><br /></td>
 
    <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/71484078?v=4" width="100px;" alt=""/><br /><sub><b>Saurabh Yadav</b></sub></a><br /></td>
+
+  <!-- <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/30110309?v=4" width="100px;" alt=""/><br /><sub><b>Neha Patial</b></sub></a><br /></td>
+
+  <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/37235114?v=4" width="100px;" alt=""/><br /><sub><b>Devdatta Chilwant</b></sub></a><br /></td> -->
   </tr>
 </table>
 

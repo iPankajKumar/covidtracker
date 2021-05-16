@@ -17,6 +17,7 @@ import {TableModule} from 'primeng/table';
 import { SingleTileComponent } from './single-tile/single-tile.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { GoogleAnalyticsService } from './services/google-analytics.service';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @Pipe({
   name: "sort"
@@ -41,7 +42,8 @@ export class ArraySortPipe {
     AppComponent,
     HomeComponent,
     ArraySortPipe,
-    SingleTileComponent
+    SingleTileComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
