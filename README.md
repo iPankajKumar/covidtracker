@@ -1,9 +1,10 @@
-[![Generic badge](https://img.shields.io/badge/Made%20with-Angular-red?style=for-the-badge)
+![Generic badge](https://img.shields.io/badge/Made%20with-Angular-red?style=for-the-badge)
 
-https://img.shields.io/website?down_message=Down&label=Website&up_message=Up&url=https%3A%2F%2Ftrackcovid19.info%2F?style=for-the-badge
-https://img.shields.io/tokei/lines/github/ipankajsingh/covidtracker?style=for-the-badge
-https://img.shields.io/github/repo-size/ipankajsingh/covidtracker?style=for-the-badge
-https://img.shields.io/github/license/ipankajsingh/covidtracker?style=for-the-badge
+![Generic badge](https://img.shields.io/website?down_message=Down&label=Website&up_message=Up&url=https%3A%2F%2Ftrackcovid19.info%2F?style=for-the-badge)
+
+![Generic badge](https://img.shields.io/tokei/lines/github/ipankajsingh/covidtracker?style=for-the-badge)
+![Generic badge](https://img.shields.io/github/repo-size/ipankajsingh/covidtracker?style=for-the-badge)
+![Generic badge](https://img.shields.io/github/license/ipankajsingh/covidtracker?style=for-the-badge)
 
 
 # Covid Tracker India
