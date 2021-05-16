@@ -1,3 +1,10 @@
+https://img.shields.io/badge/Made%20with-Angular-red?style=for-the-badge
+https://img.shields.io/website?down_message=Down&label=Website&up_message=Up&url=https%3A%2F%2Ftrackcovid19.info%2F?style=for-the-badge
+https://img.shields.io/tokei/lines/github/ipankajsingh/covidtracker?style=for-the-badge
+https://img.shields.io/github/repo-size/ipankajsingh/covidtracker?style=for-the-badge
+https://img.shields.io/github/license/ipankajsingh/covidtracker?style=for-the-badge
+
+
 # Covid Tracker India
 
 This project is an initiative taken by volunteers to help everyone search vaccination slots in a better and efficient way with least amount of efforts, you can choose your preferences and we'll do the hard work for you.
