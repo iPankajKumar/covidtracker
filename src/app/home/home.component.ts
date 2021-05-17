@@ -248,7 +248,7 @@ export class HomeComponent implements OnInit {
           tempIndex++;
           myThis.delayedLoop(arrLength,tempIndex);
         }   //  decrement i and call delayedLoop again if i > 0
-      }, 1000)
+      }, 500)
     }
 
 
