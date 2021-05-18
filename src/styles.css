@@ -660,9 +660,10 @@ body .singleTileData .ui-table .ui-table-thead > tr > th {
 
   .footer-center-content a{
     color: #FFF;
-    font-size: 23px;
-    padding-top: 3px;
-    display: block;
+    font-size: 16px;
+    padding: 7px 0 6px;
+    display: inline-block;
+    margin: 0 10px;
   }
 
   .footer-right-content{
