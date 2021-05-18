@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     this.autoShownModal.hide();
   }
   hideModalSearch() {
-    if(this.selectedCodes && this.selectedCodes.length > 0){
+    if((this.selectedCodes && this.selectedCodes.length > 0) || this.searchBy){
       this.searchModal.hide();
     }else{
       this.showToasterMessage('', 'Please select all mandatory fields.', 'error',3000);
