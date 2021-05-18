@@ -18,4 +18,12 @@ export class HomeService {
 
     }
 
+    fetchDistrictByStateId(stateId: any){
+        return this.http.get(UrlConst.fetchDistrictByStateId + stateId);
+    }
+
+    vaccinationSlotByDist(district_id: any, dateArray: any) {
+        return this.http.get(UrlConst.vaccinationSlotByPDist + district_id + "&date=" + dateArray);
+
+    }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
 import * as AllIndiaPincodes from '../../assets/json/AllIndiaPincodes.json';
+import * as StatesIds from '../../assets/json/states.json';
 import { HttpClient } from "@angular/common/http";
 import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   indianCities: any = [];
   areaCode: any[] = [];
   selectedCodes: string[] = [];
+  selectedDistrict:any;
   tempPinArray: string[] = [];
   http: any;
   modalRef: BsModalRef;
@@ -61,6 +63,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchStates();
+    this.fetchStatesId();
+    // this.fetchDestrict("21");
+    // this.fetchSlotsByDistrict();
     this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: true };
     this.dateValueSingle = new Date(moment().valueOf());
     this.minimumDate = new Date(moment().valueOf());
@@ -123,41 +128,109 @@ export class HomeComponent implements OnInit {
       this.indianStates.push(state);
     }
     this.indianStates = this.indianStates.sort((a: any, b: any) => a.code.localeCompare(b.code));
-    //console.log("states", this.indianStates);
+    console.log("states", this.indianStates);
   }
 
   fetchCities(stateName: string) {
-    this.indianCities = [];
-    this.areaCode = [];
-    this.selectedCodes = [];
-    this.resetCityDropdown = -1;
-    var allIndiaStates = AllIndiaPincodes['default'];
-    //get all cities 
-    var queryData = allIndiaStates.filter(item => item.STATENAME === stateName);
-    // uniq all cities
-    var allCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
-    //console.log("allCities", allCities);
-    allCities.forEach((element: any) => {
-      let city = {
-        name: element,
-        code: element
+    if(!this.searchBy){
+     
+      this.indianCities = [];
+      this.areaCode = [];
+      this.selectedCodes = [];
+      this.resetCityDropdown = -1;
+      var allIndiaStates = AllIndiaPincodes['default'];
+      //get all cities 
+      var queryData = allIndiaStates.filter(item => item.STATENAME === stateName);
+      // uniq all cities
+      var allCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
+      //console.log("allCities", allCities);
+      allCities.forEach((element: any) => {
+        let city = {
+          name: element,
+          code: element
+        }
+        this.indianCities.push(city);
+      });
+    }else{
+      if(this.selectedState){
+        console.log("this.selectedState ::", this.selectedState.code);
+        let stateId = this.selectedState.name;
+        this.fetchDestrict(stateId);
       }
-      this.indianCities.push(city);
-    });
-    //console.log("indianCities", this.indianCities);
+    
+    }
+    
+   
   }
 
+  fetchStatesId() {
+        
+    this.indianCities = [];
+    this.indianStates = [];
+    var indianState = [...new Set(StatesIds['default'].states)];
+    console.log("indianState :: ", indianState);
+    //Sort states alphabetically.
+    for (let stateIndex = 0; stateIndex < indianState.length; stateIndex++) {
+     
+      let state = {
+        name: indianState[stateIndex]['state_id'],
+        code: indianState[stateIndex]['state_name']
+      }
+     
+      this.indianStates.push(state);
+    }
+    this.indianStates = this.indianStates.sort((a: any, b: any) => a.code.localeCompare(b.code));
+    
+  }
+
+  fetchDestrict(stateId: string) {
+  
+    if(stateId && stateId != null){    
+      let subscription = this.homeService.fetchDistrictByStateId(stateId).subscribe((data:any) => {
+        //this.indianCities = data;
+        if(data &&data.districts){
+          this.indianCities=[];
+          data.districts.forEach((element: any) => {
+            let city = {
+              name: element.district_id,
+              code: element.district_name
+            }
+            this.indianCities.push(city);
+          });
+        }
+      
+        console.log( this.indianCities )
+        subscription.unsubscribe();
+      }, (error) => {
+        
+        this.tempPinArray =  cloneDeep(this.selectedCodes);
+        this.selectedCodes = [];
+        this.showSpinner = false;
+        clearInterval(this.refreshIntervalCalls);
+        this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error',7000);
+        return;
+      });
+    }
+  }
+  
   fetchPinCodeByCities(city: any) {
-    this.areaCode = [];
-    this.selectedCodes = [];
-    var allIndiaCities = AllIndiaPincodes['default'];
-    //Filter Data by city names
-    var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city);
-    //Filter uniq values by pincodes
-    var allPincodeData = [...new Set(queryData.map(item => item.PINCODE))].sort((a: any, b: any) => a.localeCompare(b));;
-    for (let index = 0; index < allPincodeData.length; index++) {
-      let pinObj = { pinCode: allPincodeData[index] };
-      this.areaCode.push(pinObj);
+    
+    if(!this.searchBy){
+      this.areaCode = [];
+      this.selectedCodes = [];
+      var allIndiaCities = AllIndiaPincodes['default'];
+      //Filter Data by city names
+      var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city);
+      //Filter uniq values by pincodes
+      var allPincodeData = [...new Set(queryData.map(item => item.PINCODE))].sort((a: any, b: any) => a.localeCompare(b));;
+      for (let index = 0; index < allPincodeData.length; index++) {
+        let pinObj = { pinCode: allPincodeData[index] };
+        this.areaCode.push(pinObj);
+      }
+    }else{
+      console.log("City ::" ,city);
+      this.selectedDistrict = city.code;
+      this.fetchVaccinationSlots(null,null);
     }
   }
 
@@ -260,8 +333,23 @@ export class HomeComponent implements OnInit {
 
   fetchVaccinationSlots(pinIndex:any, dateIndex:any){
 
-    if(this.selectedCodes && this.selectedCodes.length>0){
+    if(this.selectedCodes && this.selectedCodes.length>0 ||!this.searchBy){
       let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[dateIndex]).format("DD-MM-YYYY")).subscribe((data) => {
+        this.vaccinationSlotCurrentResponse = data;
+        this.validCenters();
+        subscription.unsubscribe();
+      }, (error) => {
+        //console.log("error",error);
+        this.tempPinArray =  cloneDeep(this.selectedCodes);
+        this.selectedCodes = [];
+        this.showSpinner = false;
+        clearInterval(this.refreshIntervalCalls);
+        this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error',7000);
+        return;
+      });
+    }else if(this.searchBy){
+      console.log("selectedDistrict ::", this.selectedDistrict);
+      let subscription = this.homeService.vaccinationSlotByDist(this.selectedDistrict, moment(this.dateValueSingle).format("DD-MM-YYYY")).subscribe((data) => {
         this.vaccinationSlotCurrentResponse = data;
         this.validCenters();
         subscription.unsubscribe();
@@ -276,6 +364,25 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+
+  // fetchSlotsByDistrict(district_id:any , data: any){
+  //   let subscription = this.homeService.vaccinationSlotByDist(363,"18-05-2021").subscribe((data) => {
+  //     this.vaccinationSlotCurrentResponse = data;
+  //     console.log("Slots by District ::" ,this.vaccinationSlotCurrentResponse);
+  //     this.validCenters();
+  //     subscription.unsubscribe();
+  //   }, (error) => {
+  //     //console.log("error",error);
+  //     this.tempPinArray =  cloneDeep(this.selectedCodes);
+  //     this.selectedCodes = [];
+  //     this.showSpinner = false;
+  //     clearInterval(this.refreshIntervalCalls);
+  //     this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error',7000);
+  //     return;
+  //   });
+  // }
+
+  
 
 
   validCenters() {
