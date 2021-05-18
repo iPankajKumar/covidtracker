@@ -27,6 +27,7 @@
     "ngx-bootstrap": "^5.6.2",
     "ngx-countdown": "^8.0.4",
     "ngx-toastr": "^10.0.4",
+    "ngx-ui-switch": "^8.3.0",
     "primeicons": "^4.1.0",
     "primeng": "^8.1.1",
     "rxjs": "~6.4.0",

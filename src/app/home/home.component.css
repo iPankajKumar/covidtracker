@@ -227,6 +227,72 @@ body .ui-multiselect .ui-multiselect-label {
   }
 
   
+  .toggle-pincode{
+    text-align: center;
+    padding-top: 1px;
+    height: 25px;
+  }
+.toggle-pincode .text-change-label{
+    position: relative;
+    top: -5px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+}
+
+.toggle-pincode .switch.switch-medium {
+    height: 25px;
+    border-radius: 30px;
+}
+
+.toggle-pincode .switch.switch-medium {
+    min-width: 120px;
+}
+.toggle-pincode .switch:before{
+    content: 'Pincode';
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 100%;
+    padding-left: 15px;
+    text-align: center;
+    color: #FFF;
+    font-size: 15px;
+    font-family: 'montserratsemibold';
+}
+.toggle-pincode .switch.checked{
+    background: transparent;
+}
+.toggle-pincode .switch.checked:before{
+    content: 'District';
+    padding-right: 15px;
+    padding-left: 0;
+}
+.toggle-pincode .switch small {
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    right: calc(100% - 25px);
+    transition: 0.3s ease-out all;
+    -webkit-transition: 0.3s ease-out all;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.toggle-pincode .switch.switch-medium small {
+    width: 25px;
+    height: 25px;
+    right: calc(100% - 25px);
+}
+
+.toggle-pincode .switch.checked small {
+    right: 0;
+    left: auto;
+}
+
 
 
   @media (min-width:767px) and (max-width:1350){

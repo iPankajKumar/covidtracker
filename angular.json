@@ -31,6 +31,7 @@
               "node_modules/ng2-daterangepicker/assets/daterangepicker.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-ui-switch/ui-switch.component.css",
               "src/styles.css"
             ],
             "scripts": [

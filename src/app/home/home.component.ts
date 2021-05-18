@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   countdownConfig: any;
   countdownTimer: number = 300;
   minimumDate: Date;
-
+  searchBy:boolean = true;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;

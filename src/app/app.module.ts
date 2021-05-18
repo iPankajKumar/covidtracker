@@ -18,7 +18,7 @@ import { SingleTileComponent } from './single-tile/single-tile.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { GoogleAnalyticsService } from './services/google-analytics.service';
 import { StatisticsComponent } from './statistics/statistics.component';
-
+import { UiSwitchModule } from 'ngx-ui-switch';
 @Pipe({
   name: "sort"
 })
@@ -59,7 +59,8 @@ export class ArraySortPipe {
     ToastrModule.forRoot(),
     TableModule,
     DropdownModule,
-    CountdownModule
+    CountdownModule,
+    UiSwitchModule
   ],
   providers: [GoogleAnalyticsService],
   bootstrap: [AppComponent]
