@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   vaccinationSlotCurrentResponse: any = [];
   vaccinationSlotAllResponse: any = [];
   timer = 0;
-  ageCategory: number = 0;
+  ageCategory: number = 1;
   resetCityDropdown: number = -1;
   selectedCentre: any;
   selectedState: any;
@@ -80,7 +80,11 @@ export class HomeComponent implements OnInit {
     this.autoShownModal.hide();
   }
   hideModalSearch() {
-    this.searchModal.hide();
+    if(this.selectedCodes && this.selectedCodes.length > 0){
+      this.searchModal.hide();
+    }else{
+      this.showToasterMessage('', 'Please select all mandatory fields.', 'error',3000);
+    }
   }
   openModalSearch() {
     this.searchModal.show();
@@ -157,32 +161,32 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  showToasterMessage(title: string, message: string, type: string) {
+  showToasterMessage(title: string, message: string, type: string, timeout:number) {
     switch (type) {
       case 'success':
         this.toastr.success(title, message, {
-          timeOut: 7000,
+          timeOut: timeout,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'warning':
         this.toastr.warning(title, message, {
-          timeOut: 7000,
+          timeOut: timeout,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'info':
         this.toastr.info(title, message, {
-          timeOut: 7000,
+          timeOut: timeout,
           positionClass: 'toast-top-center'
         });
         break;
 
       case 'error':
         this.toastr.error(title, message, {
-          timeOut: 7000,
+          timeOut: timeout,
           positionClass: 'toast-top-center',
         });
         break;
@@ -196,7 +200,7 @@ export class HomeComponent implements OnInit {
 
   showInfoToaster() {
     if (this.selectedCodes.length > 0) {
-      this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info');
+      this.showToasterMessage('', 'You have done your part, now we will do ours. Sit back and relax while we crunch some numbers and show you all the available slots within your preferences.', 'info',7000);
 
     }
   }
@@ -206,7 +210,7 @@ export class HomeComponent implements OnInit {
     this.firstTimeOnHomePage = false;
     this.noResultsFound = false;
     this.vaccinationSlotCurrentResponse = [];
-    this.searchModal.hide();
+    //this.searchModal.hide();
     //console.log("Trial counter", this.trialCounter++);
     this.dateArrray = [];
     this.dateArrray.push(this.dateValueSingle);
@@ -267,7 +271,7 @@ export class HomeComponent implements OnInit {
         this.selectedCodes = [];
         this.showSpinner = false;
         clearInterval(this.refreshIntervalCalls);
-        this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error');
+        this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error',7000);
         return;
       });
     }

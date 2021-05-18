@@ -168,7 +168,7 @@
             <!-- Modal Header -->
             <div class="modal-header gradient-bx">
                 <h4 class="modal-title">Search By</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModalSearch()">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="searchModal.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -219,7 +219,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>Pincode</label>
-                                    <p-multiSelect [options]="areaCode" [(ngModel)]="selectedCodes"
+                                    <p-multiSelect [ngClass]="{'red-border': (selectedCodes && selectedCodes.length == 0)}" [options]="areaCode" [(ngModel)]="selectedCodes"
                                         defaultLabel="Select Pincode" optionLabel="pinCode" maxSelectedLabels="2" resetFilterOnHide=true>
                                     </p-multiSelect>
                                 </div>
@@ -262,7 +262,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn-search-all btn-primary common-btn"
-                    (click)="slotsByPincodeAndDate();hideModalSearch();clearResponse();showInfoToaster()">Search</button>
+                    (click)="hideModalSearch();slotsByPincodeAndDate();clearResponse();showInfoToaster()">Search</button>
             </div>
 
         </div>

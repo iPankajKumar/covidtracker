@@ -161,6 +161,9 @@ body .ui-calendar.ui-calendar-w-btn .ui-inputtext {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.red-border > div{
+    border-color: red;
+}
 .ui-calendar {
     display: block;
 }
