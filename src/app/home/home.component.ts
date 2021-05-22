@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   countdownConfig: any;
   countdownTimer: number = 300;
   minimumDate: Date;
-  searchBy:boolean = true;
+  searchByDistrict:boolean = false;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
   @ViewChild('openSingleTileModal', { static: false }) openSingleTileModal: ModalDirective;
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
     this.autoShownModal.hide();
   }
   hideModalSearch() {
-    if((this.selectedCodes && this.selectedCodes.length > 0) || this.searchBy){
+    if((this.selectedCodes && this.selectedCodes.length > 0) || this.searchByDistrict){
       this.searchModal.hide();
     }else{
       this.showToasterMessage('', 'Please select all mandatory fields.', 'error',3000);
@@ -125,12 +125,11 @@ export class HomeComponent implements OnInit {
       this.indianStates.push(state);
     }
     this.indianStates = this.indianStates.sort((a: any, b: any) => a.code.localeCompare(b.code));
-    //console.log("states", this.indianStates);
+    console.log("states", this.indianStates);
   }
 
   fetchCities(stateName: string) {
-    if(!this.searchBy){
-     
+    if(!this.searchByDistrict){
       this.indianCities = [];
       this.areaCode = [];
       this.selectedCodes = [];
@@ -154,10 +153,7 @@ export class HomeComponent implements OnInit {
         let stateId = this.selectedState.name;
         this.fetchDestrict(stateId);
       }
-    
     }
-    
-   
   }
 
   fetchStatesId() {
@@ -171,7 +167,7 @@ export class HomeComponent implements OnInit {
      
       let state = {
         name: indianState[stateIndex]['state_id'],
-        code: indianState[stateIndex]['state_name']
+        code: indianState[stateIndex]['state_name'].toUpperCase()
       }
      
       this.indianStates.push(state);
@@ -190,7 +186,7 @@ export class HomeComponent implements OnInit {
           data.districts.forEach((element: any) => {
             let city = {
               name: element.district_id,
-              code: element.district_name
+              code: element.district_name.toUpperCase()
             }
             this.indianCities.push(city);
           });
@@ -213,7 +209,7 @@ export class HomeComponent implements OnInit {
   fetchPinCodeByCities(city: any, cityAllData:any) {
     //console.log("City ::" ,city,cityAllData);
 
-    if(!this.searchBy){
+    if(!this.searchByDistrict){
       this.areaCode = [];
       this.selectedCodes = [];
       var allIndiaCities = AllIndiaPincodes['default'];
@@ -275,7 +271,7 @@ export class HomeComponent implements OnInit {
   }
 
   initializeSearch(){
-    if(!this.searchBy){
+    if(!this.searchByDistrict){
       this.isValidCenter = false;
       this.firstTimeOnHomePage = false;
       this.noResultsFound = false;
@@ -295,7 +291,7 @@ export class HomeComponent implements OnInit {
 
   slotsByPincodeAndDate() {
     this.initializeSearch();
-    if(!this.searchBy){
+    if(!this.searchByDistrict){
       //console.log("this.selectedCodes",this.selectedCodes);
       
       this.delayedLoop(this.selectedCodes.length, 0);
@@ -337,7 +333,7 @@ export class HomeComponent implements OnInit {
 
   fetchVaccinationSlots(pinIndex:any, dateIndex:any){
 
-    if(this.selectedCodes && this.selectedCodes.length>0 ||!this.searchBy){
+    if(this.selectedCodes && this.selectedCodes.length>0 ||!this.searchByDistrict){
       let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[dateIndex]).format("DD-MM-YYYY")).subscribe((data) => {
         this.vaccinationSlotCurrentResponse = data;
         this.validCenters();
@@ -351,7 +347,7 @@ export class HomeComponent implements OnInit {
         this.showToasterMessage('', 'We encountered an error, but hey it is not your fault, please try again later.', 'error',7000);
         return;
       });
-    }else if(this.searchBy){
+    }else if(this.searchByDistrict){
       //("selectedDistrict ::", this.selectedDistrict);
       let subscription = this.homeService.vaccinationSlotByDist(this.selectedDistrict, moment(this.dateValueSingle).format("DD-MM-YYYY")).subscribe((data) => {
         this.vaccinationSlotCurrentResponse = data;
