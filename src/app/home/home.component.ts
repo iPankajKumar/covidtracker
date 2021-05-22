@@ -64,12 +64,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.fetchStates();
     this.fetchStatesId();
-    // this.fetchDestrict("21");
-    // this.fetchSlotsByDistrict();
     this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: true };
     this.dateValueSingle = new Date(moment().valueOf());
     this.minimumDate = new Date(moment().valueOf());
-
   }
 
   clearResponse() {
@@ -128,7 +125,7 @@ export class HomeComponent implements OnInit {
       this.indianStates.push(state);
     }
     this.indianStates = this.indianStates.sort((a: any, b: any) => a.code.localeCompare(b.code));
-    console.log("states", this.indianStates);
+    //console.log("states", this.indianStates);
   }
 
   fetchCities(stateName: string) {
@@ -140,7 +137,7 @@ export class HomeComponent implements OnInit {
       this.resetCityDropdown = -1;
       var allIndiaStates = AllIndiaPincodes['default'];
       //get all cities 
-      var queryData = allIndiaStates.filter(item => item.STATENAME === stateName);
+      var queryData = allIndiaStates.filter(item => item.STATENAME === stateName.toUpperCase());
       // uniq all cities
       var allCities = [...new Set(queryData.map(item => item.DISTRICTNAME))].sort((a: any, b: any) => a.localeCompare(b));
       //console.log("allCities", allCities);
@@ -153,7 +150,7 @@ export class HomeComponent implements OnInit {
       });
     }else{
       if(this.selectedState){
-        console.log("this.selectedState ::", this.selectedState.code);
+        //console.log("this.selectedState ::", this.selectedState.code);
         let stateId = this.selectedState.name;
         this.fetchDestrict(stateId);
       }
@@ -168,7 +165,7 @@ export class HomeComponent implements OnInit {
     this.indianCities = [];
     this.indianStates = [];
     var indianState = [...new Set(StatesIds['default'].states)];
-    console.log("indianState :: ", indianState);
+    //console.log("indianState :: ", indianState);
     //Sort states alphabetically.
     for (let stateIndex = 0; stateIndex < indianState.length; stateIndex++) {
      
@@ -199,7 +196,7 @@ export class HomeComponent implements OnInit {
           });
         }
       
-        console.log( this.indianCities )
+        //console.log( this.indianCities )
         subscription.unsubscribe();
       }, (error) => {
         
@@ -213,14 +210,15 @@ export class HomeComponent implements OnInit {
     }
   }
   
-  fetchPinCodeByCities(city: any) {
-    
+  fetchPinCodeByCities(city: any, cityAllData:any) {
+    //console.log("City ::" ,city,cityAllData);
+
     if(!this.searchBy){
       this.areaCode = [];
       this.selectedCodes = [];
       var allIndiaCities = AllIndiaPincodes['default'];
       //Filter Data by city names
-      var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city);
+      var queryData = allIndiaCities.filter(item => item.DISTRICTNAME === city.toUpperCase());
       //Filter uniq values by pincodes
       var allPincodeData = [...new Set(queryData.map(item => item.PINCODE))].sort((a: any, b: any) => a.localeCompare(b));;
       for (let index = 0; index < allPincodeData.length; index++) {
@@ -228,9 +226,7 @@ export class HomeComponent implements OnInit {
         this.areaCode.push(pinObj);
       }
     }else{
-      console.log("City ::" ,city);
-      this.selectedDistrict = city.code;
-      this.fetchVaccinationSlots(null,null);
+      this.selectedDistrict = cityAllData.name;
     }
   }
 
@@ -279,38 +275,48 @@ export class HomeComponent implements OnInit {
   }
 
   initializeSearch(){
-    this.isValidCenter = false;
-    this.firstTimeOnHomePage = false;
-    this.noResultsFound = false;
-    this.vaccinationSlotCurrentResponse = [];
-    //this.searchModal.hide();
-    //console.log("Trial counter", this.trialCounter++);
-    this.dateArrray = [];
-    this.dateArrray.push(this.dateValueSingle);
-
-    if (this.selectedCodes.length > 0) {
-      this.showSpinner = true;
+    if(!this.searchBy){
+      this.isValidCenter = false;
+      this.firstTimeOnHomePage = false;
+      this.noResultsFound = false;
+      this.vaccinationSlotCurrentResponse = [];
+      //this.searchModal.hide();
+      //console.log("Trial counter", this.trialCounter++);
+      this.dateArrray = [];
+      this.dateArrray.push(this.dateValueSingle);
+  
+      if (this.selectedCodes.length > 0) {
+        this.showSpinner = true;
+      }
+    }else{
+      this.fetchVaccinationSlots(null, null);
     }
   }
 
   slotsByPincodeAndDate() {
-
     this.initializeSearch();
-    //console.log("this.selectedCodes",this.selectedCodes);
-    
-    this.delayedLoop(this.selectedCodes.length, 0);
-
-    //in 5 min refresh again
-    // interval((this.countdownTimer + 6) * 1000).subscribe(x => {
-    //   this.initializeSearch();
-    //   this.delayedLoop(this.selectedCodes.length, 0);
-    // });
-
-    this.refreshIntervalCalls = setInterval(() => {
-      this.initializeSearch();
+    if(!this.searchBy){
+      //console.log("this.selectedCodes",this.selectedCodes);
+      
       this.delayedLoop(this.selectedCodes.length, 0);
-    }, ((this.countdownTimer+this.selectedCodes.length)*1000)); //adding this.selectedCodes.length to compensate for 1 sec delay between every API call in delayedLoop() method
-
+  
+      //in 5 min refresh again
+      // interval((this.countdownTimer + 6) * 1000).subscribe(x => {
+      //   this.initializeSearch();
+      //   this.delayedLoop(this.selectedCodes.length, 0);
+      // });
+  
+      this.refreshIntervalCalls = setInterval(() => {
+        this.initializeSearch();
+        this.delayedLoop(this.selectedCodes.length, 0);
+      }, ((this.countdownTimer+this.selectedCodes.length)*1000)); //adding this.selectedCodes.length to compensate for 1 sec delay between every API call in delayedLoop() method
+  
+    }else{
+      this.refreshIntervalCalls = setInterval(() => {
+        this.fetchVaccinationSlots(null, null);
+      }, 300000);
+    }
+    
   }
 
   delayedLoop(i:any,pIndex:any) {
@@ -327,8 +333,6 @@ export class HomeComponent implements OnInit {
         }   //  decrement i and call delayedLoop again if i > 0
       }, 500)
     }
-
-
   }
 
   fetchVaccinationSlots(pinIndex:any, dateIndex:any){
@@ -348,7 +352,7 @@ export class HomeComponent implements OnInit {
         return;
       });
     }else if(this.searchBy){
-      console.log("selectedDistrict ::", this.selectedDistrict);
+      //("selectedDistrict ::", this.selectedDistrict);
       let subscription = this.homeService.vaccinationSlotByDist(this.selectedDistrict, moment(this.dateValueSingle).format("DD-MM-YYYY")).subscribe((data) => {
         this.vaccinationSlotCurrentResponse = data;
         this.validCenters();
@@ -481,10 +485,11 @@ export class HomeComponent implements OnInit {
     return found;
   }
 
-
-
-
-
+  resetForm(event:any){
+    this.selectedState = null;
+    this.selectedCity = null;
+    this.selectedCodes = [];
+  }
 }
 
 

@@ -176,7 +176,7 @@
                         </div>
                         <div class="col-xl-6">
                             <div class="toggle-pincode">
-                                <ui-switch [(ngModel)]="searchBy"></ui-switch>
+                                <ui-switch [(ngModel)]="searchBy" (change)="resetForm($event)"></ui-switch>
                             </div>
                         </div>
                         <div class="col-xl-3 padding-lr-0">
@@ -223,7 +223,7 @@
                                             optionLabel="code"
                                             [filter]="true"
                                             [showClear]="true"
-                                            (ngModelChange)="fetchPinCodeByCities(selectedCity?.code)"
+                                            (ngModelChange)="fetchPinCodeByCities(selectedCity?.code,selectedCity)"
                                             resetFilterOnHide=true
                                             >
                                         </p-dropdown>
@@ -294,9 +294,9 @@
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 col-7">
                             <h4 class="modal-title">Available Sessions</h4>
                         </div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-5">
+                        <div style="padding-right: 35px;" class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-5">
                             <div class="book-btn">
-                                <a href="https://selfregistration.cowin.gov.in/" target="_blank" class="btn-book-slot btn-primary common-btn">Book my Slot</a>
+                                <a href="https://selfregistration.cowin.gov.in/" target="_blank"  class="btn-book-slot btn-primary common-btn">Book my Slot</a>
                             </div>
                             <button type="button" class="close pull-right" aria-label="Close" (click)="hideAvailableSessionModal()">
                                 <span aria-hidden="true">&times;</span>
