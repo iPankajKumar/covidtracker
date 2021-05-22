@@ -169,7 +169,7 @@
             <div class="modal-header gradient-bx">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-3 padding-lr-0">
+                        <!-- <div class="col-xl-3 padding-lr-0">
                             <div>
                                 <h4 class="modal-title">Search By</h4>
                             </div>
@@ -178,12 +178,13 @@
                             <div class="toggle-pincode">
                                 <ui-switch [(ngModel)]="searchByDistrict" (change)="resetForm($event)"></ui-switch>
                             </div>
-                        </div>
-                        <div class="col-xl-3 padding-lr-0">
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="searchModal.hide()">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                        </div> -->
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="searchModal.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <!-- <div class="col-xl-3 padding-lr-0">
+                            //Uncomment this div and put button tag back in here.
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -247,7 +248,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>Date</label>
-                                    <p-calendar [minDate]="minimumDate" [(ngModel)]="dateValueSingle" [monthNavigator]="true"
+                                    <p-calendar [minDate]="dateValueSingle" [(ngModel)]="dateValueSingle" [monthNavigator]="true"
                                         [yearNavigator]="true" dateFormat="dd-mm-yy" yearRange="2021:2099"
                                         [touchUI]="false" [showIcon]="true" [readonlyInput]="true"></p-calendar>
                                 </div>
@@ -292,7 +293,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-6 col-7">
-                            <h4 class="modal-title">Available Sessions</h4>
+                            <h4 class="modal-title">{{selectedCentre?.name}}</h4>
                         </div>
                         <div style="padding-right: 35px;" class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-5">
                             <div class="book-btn">
@@ -311,6 +312,9 @@
             <div class="modal-body">
                 <div class="container-fluid singleTileData">
                         <div *ngIf="selectedCentre">
+                            <div class="vaccineDetails" *ngIf="selectedCentre.fee_type=='Paid'">
+                                <span  *ngFor="let vaccineDetails of selectedCentre.vaccine_fees">{{vaccineDetails.vaccine}}: ₹&nbsp;{{vaccineDetails.fee}} &nbsp;&nbsp; </span>
+                            </div>
                             <p-table class="table-data" [value]="selectedCentre.sessions">
                                 <ng-template pTemplate="header">
                                     <tr>
@@ -318,18 +322,20 @@
                                         <th>Available Capacity</th>
                                         <th>Min Age Limit</th>
                                         <th>Date</th>
-                                        <th>Time Slots</th>
+                                        <!-- <th>Time Slots</th> -->
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-session>
                                     <tr *ngIf="session.available_capacity != 0">
                                         <td>{{session.vaccine}}</td>
-                                        <td>{{session.available_capacity}}</td>
+                                        <td>Dose 1:&nbsp;{{session.available_capacity_dose1}} <br>
+                                            Dose 2:&nbsp;{{session.available_capacity_dose2}}
+                                        </td>
                                         <td>{{session.min_age_limit}}</td>
                                         <td>{{session.date}}</td>
-                                        <td>
+                                        <!-- <td>
                                             <span *ngFor="let sessionSlots of session.slots">{{sessionSlots}},<br/> </span>
-                                        </td> 
+                                        </td>  -->
                                     </tr>
                                 </ng-template>
                             </p-table>

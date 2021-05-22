@@ -689,6 +689,11 @@ body .singleTileData .ui-table .ui-table-thead > tr > th {
     border: 1px solid rgb(255, 255, 255);
     color: #ffffff;
 }
+
+.vaccineDetails{
+    text-align: center;
+    font-weight: bold;
+}
   @media screen and (min-width:300px){
     .width-100p.row {
         margin-left: 0;

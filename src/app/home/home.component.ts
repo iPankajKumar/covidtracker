@@ -54,7 +54,6 @@ export class HomeComponent implements OnInit {
   showSpinner: boolean = false;
   countdownConfig: any;
   countdownTimer: number = 300;
-  minimumDate: Date;
   searchByDistrict:boolean = false;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   @ViewChild('searchModal', { static: false }) searchModal: ModalDirective;
@@ -66,7 +65,7 @@ export class HomeComponent implements OnInit {
     this.fetchStatesId();
     this.countdownConfig = { leftTime: this.countdownTimer, format: 'mm:ss', demand: true };
     this.dateValueSingle = new Date(moment().valueOf());
-    this.minimumDate = new Date(moment().valueOf());
+    
   }
 
   clearResponse() {
@@ -125,7 +124,7 @@ export class HomeComponent implements OnInit {
       this.indianStates.push(state);
     }
     this.indianStates = this.indianStates.sort((a: any, b: any) => a.code.localeCompare(b.code));
-    console.log("states", this.indianStates);
+    //console.log("states", this.indianStates);
   }
 
   fetchCities(stateName: string) {
@@ -280,12 +279,12 @@ export class HomeComponent implements OnInit {
       //console.log("Trial counter", this.trialCounter++);
       this.dateArrray = [];
       this.dateArrray.push(this.dateValueSingle);
-  
+     // console.log("Date-->>>> ", this.dateArrray);
       if (this.selectedCodes.length > 0) {
         this.showSpinner = true;
       }
     }else{
-      this.fetchVaccinationSlots(null, null);
+      this.fetchVaccinationSlots(null);
     }
   }
 
@@ -309,7 +308,7 @@ export class HomeComponent implements OnInit {
   
     }else{
       this.refreshIntervalCalls = setInterval(() => {
-        this.fetchVaccinationSlots(null, null);
+        this.fetchVaccinationSlots(null);
       }, 300000);
     }
     
@@ -321,7 +320,7 @@ export class HomeComponent implements OnInit {
     if(this.selectedCodes && pIndex <  this.selectedCodes.length){
       let myThis = this;
       setTimeout(function() {
-        myThis.fetchVaccinationSlots(tempIndex,this.dateArrray);  
+        myThis.fetchVaccinationSlots(tempIndex);  
         //console.log(arrLength,tempIndex);
         if (--arrLength) {
           tempIndex++;
@@ -331,10 +330,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  fetchVaccinationSlots(pinIndex:any, dateIndex:any){
+  fetchVaccinationSlots(pinIndex:any){
 
     if(this.selectedCodes && this.selectedCodes.length>0 ||!this.searchByDistrict){
-      let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[dateIndex]).format("DD-MM-YYYY")).subscribe((data) => {
+      let subscription = this.homeService.vaccinationSlotByPin(this.selectedCodes[pinIndex]['pinCode'], moment(this.dateArrray[0]).format("DD-MM-YYYY")).subscribe((data) => {
         this.vaccinationSlotCurrentResponse = data;
         this.validCenters();
         subscription.unsubscribe();
