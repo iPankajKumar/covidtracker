@@ -68,7 +68,7 @@ Thanks goes to these wonderful people :
 <!-- ([emoji key](https://allcontributors.org/docs/en/emoji-key)) -->
 <table>
   <tr>
-    <td align="center"><a href="https://ipankajsingh.com"><img src="https://avatars2.githubusercontent.com/u/24999656?v=4" width="100px;" alt=""/><br /><sub><b>Pankaj Singh</b></sub></a><br /></td>
+    <td align="center"><a href="https://pankajkumar.xyz"><img src="https://avatars2.githubusercontent.com/u/24999656?v=4" width="100px;" alt=""/><br /><sub><b>Pankaj Kumar</b></sub></a><br /></td>
 
 
   <td align="center"><a href="#"><img src="https://avatars2.githubusercontent.com/u/36234658?v=4" width="100px;" alt=""/><br /><sub><b>Prashant Giri</b></sub></a><br /></td>
