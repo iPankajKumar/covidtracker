@@ -30,7 +30,7 @@
     "ngx-ui-switch": "^8.3.0",
     "primeicons": "^4.1.0",
     "primeng": "^8.1.1",
-    "rxjs": "~6.4.0",
+    "rxjs": "~6.6.7",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
