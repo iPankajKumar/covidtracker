@@ -7,7 +7,7 @@
 
 # Covid Tracker India
 
-This project is an initiative taken by volunteers to help everyone search vaccination slots in a better and efficient way with least amount of efforts, you can choose your preferences and we'll do the hard work for you.
+This project was an initiative taken by volunteers to help everyone search vaccination slots in a better and efficient way with least amount of efforts, you can choose your preferences (multiple PINCode's near by you) and we'll do the hard work for you.
 
 
 
